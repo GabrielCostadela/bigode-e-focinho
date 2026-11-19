@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bigode & Focinho</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,800&display=swap" rel="stylesheet">
+<style>
+/* VOICE everyday shop, warm and playful but tidy
+   IDEA a pet-shop shelf tag and a hand-sewn label: mango fields, stitched edges
+   PICTURE illustrated dog and cat in the hero; every product drawn as its own object
+   COLOUR mango ground fields, warm ink, coral accent, sky support
+   TYPE Fredoka for titles and prices, Nunito Sans for text
+   LAYOUT header, hero band with scene, shelves of products; phone stacks title, picture, actions */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#17110b);--ink:light-dark(#24190f,#f6eee3);--mute:light-dark(#6d5f52,#b9aa98);--line:light-dark(#eadfce,#3a2d20);--panel:light-dark(#fff8ea,#211810);--mango:#ffb703;--mango2:light-dark(#ffe7a3,#5a4108);--coral:light-dark(#e8553a,#ff7b5f);--sky:light-dark(#d8eefb,#16303f);--ok:light-dark(#1f7a4d,#5fd39a);--okbg:light-dark(#e6f5ec,#123222);--warn:light-dark(#9a5b00,#ffc861);--warnbg:light-dark(#fff1d2,#3a2a07);--bad:light-dark(#b42318,#ff8a80);--badbg:light-dark(#fde8e6,#3d1512)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Nunito Sans",system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3,.disp{font-family:Fredoka,"Nunito Sans",sans-serif;line-height:1.08;letter-spacing:-.01em;margin:0}
+h1{font-size:clamp(34px,5vw,52px);text-wrap:balance}
+h2{font-size:clamp(24px,3vw,32px);margin-bottom:14px}
+h3{font-size:19px;margin-bottom:8px}
+p{margin:0 0 10px}
+a{color:inherit}
+img,svg{max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:max(4vw,16px)}
+.band{padding-block:clamp(26px,4vw,56px)}
+.testbar{background:var(--ink);color:var(--bg);font-size:14px;padding:7px 0}
+.testbar .wrap{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;justify-content:space-between}
+.testbar a{color:var(--mango);font-weight:800}
+header.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.hrow{display:flex;align-items:center;gap:16px;padding-block:10px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:8px;text-decoration:none;font-family:Fredoka,"Nunito Sans",sans-serif;font-weight:700;font-size:23px}
+.logo svg{width:40px;height:40px}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main a{text-decoration:none;font-weight:700;padding:8px 10px;border-radius:10px}
+nav.main a:hover,nav.main a.on{background:var(--mango2)}
+form.search{flex:1;display:flex;min-width:200px;max-width:380px;margin-left:auto}
+form.search input{flex:1;border:2px solid var(--line);border-right:0;border-radius:12px 0 0 12px;padding:9px 12px;font:inherit;font-size:16px;background:var(--bg);color:var(--ink)}
+form.search button{border:2px solid var(--ink);background:var(--ink);color:var(--bg);border-radius:0 12px 12px 0;padding:0 14px;font-weight:800;cursor:pointer}
+.cartbtn{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:800;background:var(--mango);color:#24190f;padding:9px 14px;border-radius:12px;min-height:44px}
+.cartbtn b{background:#24190f;color:#ffb703;border-radius:20px;padding:0 8px;font-size:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);font:800 16px "Nunito Sans",sans-serif;padding:11px 20px;border-radius:14px;min-height:46px;cursor:pointer;text-decoration:none}
+.btn.alt{background:transparent;color:var(--ink)}
+.btn.mango{background:var(--mango);border-color:var(--mango);color:#24190f}
+.btn.sm{padding:6px 12px;min-height:38px;font-size:14px;border-radius:10px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.hero{background:var(--mango);color:#24190f}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:center}
+.hero p.lead{font-size:18px;max-width:34em;margin:14px 0 20px}
+.hero .fig{min-height:340px}
+.hero svg{width:100%;height:100%;display:block}
+.perks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border-bottom:1px solid var(--line)}
+.perks div{padding:14px 16px;border-right:1px dashed var(--line);font-size:15px}
+.perks b{display:block;font-family:Fredoka,"Nunito Sans",sans-serif;font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.card{display:flex;flex-direction:column;text-decoration:none;border-radius:18px;overflow:hidden;background:var(--panel);border:1px solid var(--line)}
+.card .pic{aspect-ratio:1;background:var(--sky)}
+.card .pic svg{width:100%;height:100%;display:block}
+.ph{display:block;width:100%;height:100%;position:relative;background:var(--sky)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph.noimg img{display:none}
+.ph.noimg::after{content:attr(data-n);position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:10px;font:600 16px Fredoka,"Nunito Sans",sans-serif;color:var(--mute)}
+.card .info{padding:12px 14px 14px;display:flex;flex-direction:column;gap:2px;flex:1}
+.card .nm{font-weight:800;font-size:17px}
+.card .pr{font-family:Fredoka,"Nunito Sans",sans-serif;font-size:22px;white-space:nowrap}
+.card .px{font-size:14px;color:var(--mute)}
+.tag{display:inline-block;font-size:13px;font-weight:800;padding:2px 8px;border-radius:20px;background:var(--mango2);color:var(--ink);margin-right:4px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;align-items:center}
+.chip{border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:30px;padding:7px 14px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer;min-height:40px}
+.chip.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+select,input[type=text],input[type=email],input[type=tel],input:not([type]),textarea{font:inherit;font-size:16px;border:2px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--bg);color:var(--ink);width:100%}
+label{font-weight:700;font-size:15px;display:block;margin-bottom:4px}
+.fld{margin-bottom:12px}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0 12px}
+.pp{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:start}
+.gal .main{aspect-ratio:1;border-radius:22px;overflow:hidden;background:var(--sky)}
+.gal .main svg{width:100%;height:100%;display:block}
+.thumbs{display:flex;gap:10px;margin-top:10px}
+.thumbs button{width:84px;aspect-ratio:1;padding:0;border:3px solid transparent;border-radius:14px;overflow:hidden;background:var(--sky);cursor:pointer}
+.thumbs button.on{border-color:var(--ink)}
+.thumbs svg{width:100%;height:100%;display:block}
+.price{font-family:Fredoka,"Nunito Sans",sans-serif;font-size:40px;line-height:1;white-space:nowrap}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.opt{border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:12px;padding:8px 14px;font:700 15px "Nunito Sans",sans-serif;cursor:pointer;min-height:44px}
+.opt.on{border-color:var(--ink);background:var(--mango2)}
+.opt:disabled{text-decoration:line-through;opacity:.5}
+.qty{display:inline-flex;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.qty button{width:42px;border:0;background:var(--panel);color:var(--ink);font-size:20px;cursor:pointer}
+.qty span{min-width:40px;display:grid;place-items:center;font-weight:800}
+.box{border:1px solid var(--line);border-radius:18px;padding:18px;background:var(--panel)}
+.note{font-size:14px;color:var(--mute)}
+.stock{font-weight:800;font-size:15px}
+.stock.low{color:var(--coral)}
+table{border-collapse:collapse;width:100%}
+th,td{text-align:left;padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top;font-size:15px}
+th{font-size:14px;color:var(--mute)}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+.cartgrid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr);gap:28px;align-items:start}
+.citem{display:grid;grid-template-columns:84px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}
+.citem .pic{width:84px;aspect-ratio:1;border-radius:14px;overflow:hidden;background:var(--sky)}
+.sum div{display:flex;justify-content:space-between;gap:10px;padding:5px 0}
+.sum div span:last-child{white-space:nowrap;font-variant-numeric:tabular-nums}
+.sum .tot{border-top:2px solid var(--ink);margin-top:6px;padding-top:10px;font-family:Fredoka,"Nunito Sans",sans-serif;font-size:24px}
+.sticky{position:sticky;top:90px}
+.shipopt{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px;cursor:pointer}
+.shipopt input{margin-top:4px;width:18px;height:18px}
+.shipopt.on{border-color:var(--ink);background:var(--mango2)}
+.shipopt b{white-space:nowrap}
+.bar{height:10px;border-radius:10px;background:var(--line);overflow:hidden;margin:6px 0}
+.bar i{display:block;height:100%;background:var(--coral)}
+.steps{counter-reset:s}
+.step{border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:14px;background:var(--panel)}
+.step.off{opacity:.55}
+.step h3{display:flex;gap:10px;align-items:center}
+.step h3::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:16px}
+.step.done h3::before{content:"✓";background:var(--ok)}
+.paytabs{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.err{color:var(--bad);font-weight:700;font-size:14px;margin-top:4px}
+.alert{padding:12px 14px;border-radius:12px;margin:10px 0;font-size:15px}
+.alert.ok{background:var(--okbg);color:var(--ok)}
+.alert.warn{background:var(--warnbg);color:var(--warn)}
+.alert.bad{background:var(--badbg);color:var(--bad)}
+.tl{list-style:none;margin:14px 0 0;padding:0 0 0 6px}
+.tl li{position:relative;padding:0 0 16px 28px;color:var(--mute)}
+.tl li::before{content:"";position:absolute;left:0;top:4px;width:14px;height:14px;border-radius:50%;border:3px solid var(--line);background:var(--bg)}
+.tl li::after{content:"";position:absolute;left:7px;top:22px;bottom:2px;width:2px;background:var(--line)}
+.tl li:last-child::after{display:none}
+.tl li.done{color:var(--ink)}
+.tl li.done::before{background:var(--ok);border-color:var(--ok)}
+.tl li.done::after{background:var(--ok)}
+.tl li.now::before{background:var(--mango);border-color:var(--ink)}
+.tl b{display:block}
+.tl small{font-size:13px;color:var(--mute)}
+.pill{display:inline-block;padding:2px 10px;border-radius:20px;font-size:13px;font-weight:800;white-space:nowrap}
+.pill.ok{background:var(--okbg);color:var(--ok)}.pill.warn{background:var(--warnbg);color:var(--warn)}.pill.bad{background:var(--badbg);color:var(--bad)}.pill.info{background:var(--sky);color:var(--ink)}
+.qr{width:200px;height:200px;background:#fff;padding:10px;border-radius:12px;border:1px solid var(--line)}
+code.cc{display:block;padding:10px;background:var(--bg);border:1px dashed var(--line);border-radius:10px;overflow-wrap:anywhere;font-size:13px}
+.mail{display:grid;grid-template-columns:minmax(240px,1fr) minmax(0,2fr);gap:20px;align-items:start}
+.mlist button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);padding:12px;cursor:pointer;font:inherit}
+.mlist button.on{background:var(--mango2)}
+.mlist button.unread b{font-weight:800}
+.mlist small{display:block;color:var(--mute);font-size:13px}
+.mview{border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.mview .mh{background:var(--mango);color:#24190f;padding:14px 18px}
+.mview .mb{padding:18px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:22px}
+.kpis div{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:var(--panel)}
+.kpis b{display:block;font-family:Fredoka,"Nunito Sans",sans-serif;font-size:28px;white-space:nowrap}
+.kpis small{color:var(--mute);font-size:13px}
+.prose{max-width:760px}
+.prose h2{margin-top:26px}
+.prose li{margin-bottom:6px}
+footer{background:var(--ink);color:var(--bg);margin-top:40px}
+footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;padding-block:34px}
+footer a{color:var(--bg);display:block;padding:3px 0;text-decoration:none}
+footer a:hover{text-decoration:underline}
+footer .legal{border-top:1px solid color-mix(in srgb,var(--bg) 25%,transparent);padding-block:16px;font-size:14px}
+footer h3{color:var(--mango)}
+.cookie{position:fixed;left:16px;right:16px;bottom:16px;z-index:50;max-width:620px;background:var(--bg);color:var(--ink);border:2px solid var(--ink);border-radius:18px;padding:18px;box-shadow:0 8px 0 var(--ink)}
+.cookie .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ck{display:flex;gap:10px;align-items:flex-start;margin:8px 0}
+.ck input{width:20px;height:20px;margin-top:3px;flex:none}
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:700;display:none;max-width:90vw}
+.why{font-size:14px;margin-top:8px}
+.crumbs{font-size:14px;color:var(--mute);margin-bottom:14px}
+.crumbs a{color:var(--mute)}
+.empty{text-align:center;padding:40px 10px}
+.stitch{border:2px dashed color-mix(in srgb,#24190f 35%,transparent);border-radius:18px;padding:16px 18px}
+.club{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;background:var(--sky);border-radius:24px;padding:clamp(18px,3vw,32px)}
+.club .pic{aspect-ratio:4/3;border-radius:18px;overflow:hidden}
+@media(max-width:860px){.hero .wrap,.pp,.cartgrid,.mail,.club{grid-template-columns:minmax(0,1fr)}.sticky{position:static}.hero .fig{min-height:260px}}
+@media(max-width:600px){header.top{position:static}.hrow{gap:8px 12px}.cartbtn{order:1;margin-left:auto;padding:8px 10px;font-size:15px}.logo{font-size:19px}.logo svg{width:34px;height:34px}nav.main{order:2;flex-basis:100%}form.search{order:3;max-width:none;flex-basis:100%;margin-left:0}.citem{grid-template-columns:64px minmax(0,1fr)}.citem .pic{width:64px}.citem .act{grid-column:2}table{font-size:13px}th,td{padding:6px 4px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:flex;justify-content:space-between;gap:12px;border:0;padding:3px 0;text-align:right}.stack td::before{content:attr(data-l);font-weight:700;color:var(--mute);text-align:left}.perks div{border-right:0;border-bottom:1px dashed var(--line)}}
+@media(prefers-reduced-motion:no-preference){.wag{transform-origin:310px 238px;animation:wag 1.4s ease-in-out infinite}@keyframes wag{50%{transform:rotate(14deg)}}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;const t=c.closest('table');c.dataset.l=t&&t.rows[0]&&t.rows[0].cells[i]?t.rows[0].cells[i].textContent:''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<header class="top"><div class="wrap hrow">
+<a class="logo" href="#inicio" aria-label="Bigode & Focinho, página inicial"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#ffb703"/><path d="M9 14l5-8 4 7M31 14l-5-8-4 7" fill="#24190f"/><circle cx="20" cy="22" r="11" fill="#24190f"/><circle cx="16" cy="20" r="1.8" fill="#ffb703"/><circle cx="24" cy="20" r="1.8" fill="#ffb703"/><path d="M18 25h4l-2 2z" fill="#e8553a"/><path d="M8 24h7M8 27h7M25 24h7M25 27h7" stroke="#24190f" stroke-width="1.3"/></svg>Bigode & Focinho</a>
+<nav class="main" aria-label="Seções"><a href="#loja" data-nav="loja">Loja</a><a href="#caes" data-nav="caes">Cães</a><a href="#gatos" data-nav="gatos">Gatos</a><a href="#rastreio" data-nav="rastreio">Meu pedido</a><a href="#sobre" data-nav="sobre">Sobre</a></nav>
+<form class="search" id="searchForm" role="search"><input id="q" type="search" placeholder="Buscar: bandana, arranhador, cama…" aria-label="Buscar produtos"><button type="submit">Buscar</button></form>
+<a class="cartbtn" href="#carrinho">Carrinho <b id="cartCount">0</b></a>
+</div></header>
+<main id="app"></main>
+<footer><div class="wrap">
+<div class="cols">
+<div><h3>Bigode & Focinho</h3><p>Acessórios e brinquedos costurados à mão para cães e gatos.</p><p>Atendimento: seg. a sex., 9h às 18h<br>bigodeefocinhopets@gmail.com<br>(32) 0000-0000</p></div>
+<div><h3>Ajuda</h3><a href="#trocas">Trocas e devoluções</a><a href="#privacidade">Política de privacidade</a><a href="#cookies">Política de cookies</a><a href="#" data-act="cookieprefs">Preferências de cookies</a><a href="#contato">Fale conosco</a></div>
+<div><h3>Loja</h3><a href="#loja">Todos os produtos</a><a href="#caes">Para cães</a><a href="#gatos">Para gatos</a><a href="#sobre">Sobre o ateliê</a></div>
+<div><h3>Pagamento e segurança</h3><p>Pix com 5% de desconto · cartão em até 3x sem juros · site com HTTPS · antifraude em todos os pedidos de cartão.</p><a href="#painel">Painel do lojista</a></div>
+</div>
+<div class="legal">Bigode & Focinho Acessórios Pet Ltda. · CNPJ 00.000.000/0001-00 · Rua Fictícia, 100, Centro, Juiz de Fora/MG, CEP 36000-000. Empresa, CNPJ e endereço fictícios, criados para um trabalho acadêmico. Preços e condições válidos para a loja on-line.</div>
+</div></footer>
+<div class="cookie" id="cookieBox" hidden></div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+/* ==================================================================
+   CONFIGURAÇÃO DO E-MAIL REAL (EmailJS): preencha os campos abaixo.
+   Onde achar cada um em dashboard.emailjs.com:
+   - publicKey:  Account > General > Public Key
+   - serviceId:  Email Services > o ID do serviço (ex.: service_abc1234)
+   - templateId: Email Templates > o ID do modelo (ex.: template_xyz9876)
+   - lojaEmail:  e-mail da loja, que recebe aviso de cada pedido e mensagem
+   ================================================================== */
+window.LOJA_CONFIG={
+  publicKey:'Fcfz98mJhqiEeLkwY',
+  serviceId:'service_3s05dim',
+  templateId:'template_ftlmabe',
+  lojaEmail:'bigodeefocinhopets@gmail.com'
+};
+</script>
+<script>
+{
+/* ---------- dados ---------- */
+const P=[
+{id:'bandana-ipe',nome:'Bandana Lima',cat:'Acessórios',esp:['cao','gato'],art:'bandana',cor:'#9ccc3c',tags:'bandana lenço lenco acessório presente verde lima limão',desc:'Bandana de algodão verde-limão que fica bonita em qualquer pelagem. Fecha com botão de pressão, sem nó, e não aperta o pescoço.',det:['100% algodão','Fecho de pressão ajustável','Lavar à mão, secar à sombra'],opt:'Tamanho',v:[['P · pescoço até 30 cm','BF-BAN-P',39.9,11,60,14,'30 cm'],['M · até 42 cm','BF-BAN-M',44.9,12.5,70,22,'42 cm'],['G · até 55 cm','BF-BAN-G',49.9,14,80,9,'55 cm']],pop:9},
+{id:'coleira-trilha',nome:'Coleira de Couro',cat:'Acessórios',esp:['cao'],art:'coleira',cor:'#b3262a',tags:'coleira colar couro passeio regulável fivela cachorro vermelha bege',desc:'Coleira de couro legítimo com forro macio e fivela de metal. Regulável de 33 a 49 cm, com argola para plaquinha de identificação.',det:['Couro legítimo com forro','Fivela e argola de metal','Regulável de 33 a 49 cm'],opt:'Cor',v:[['Vermelha','BF-COL-VER',79.9,26,140,12,'49 cm','#b3262a'],['Bege','BF-COL-BEG',79.9,26,140,10,'49 cm','#cdb08a']],pop:7},
+{id:'guia-passeio',nome:'Guia Impermeável',cat:'Acessórios',esp:['cao'],art:'guia',cor:'#c8262a',tags:'guia coleira passeio cachorro vermelha impermeável praia',desc:'Guia vermelha de fita revestida, que não absorve água, lama nem cheiro. Ideal para praia, chuva e trilha: é só passar um pano.',det:['Fita revestida impermeável','Mosquetão de metal','Alça na ponta'],opt:'Comprimento',v:[['1,2 m','BF-GUI-120',64.9,20,180,10,'1,2 m'],['1,8 m','BF-GUI-180',74.9,24,230,7,'1,8 m']],pop:6},
+{id:'caminha-nuvem',nome:'Caminha Nuvem',cat:'Conforto',esp:['cao','gato'],art:'cama',cor:'#f2efe8',tags:'cama caminha almofada dormir conforto branca',desc:'Caminha branca, fofa e baixa, para cães e gatos se esticarem. A capa sai com zíper e vai à máquina.',det:['Capa de pelúcia com zíper','Enchimento de fibra siliconada','Base antiderrapante'],opt:'Tamanho',v:[['P · 50 cm','BF-CAM-P',189.9,72,1200,6,'50 cm'],['M · 65 cm','BF-CAM-M',229.9,88,1700,5,'65 cm'],['G · 80 cm','BF-CAM-G',269.9,104,2300,3,'80 cm']],pop:8},
+{id:'arranhador-onda',nome:'Arranhador de Sisal',cat:'Brinquedos',esp:['gato'],art:'arranhador',cor:'#c89b63',tags:'arranhador unha gato sisal poste torre brinquedo',desc:'Arranhador revestido de sisal, que protege o sofá e gasta as unhas do gato. Escolha o poste com brinquedo pendurado ou a torre com plataforma.',det:['Revestimento de sisal natural','Base pesada que não tomba','Brinquedo pendurado incluso'],opt:'Modelo',v:[['Poste com brinquedo · 50 cm','BF-ARR-P',99.9,32,2200,12,'50 cm'],['Torre com plataforma · 90 cm','BF-ARR-T',189.9,62,5200,5,'90 cm']],pop:10},
+{id:'varinha-penas',nome:'Varinha de Penas',cat:'Brinquedos',esp:['gato'],art:'varinha',cor:'#e8553a',tags:'varinha pena penas brinquedo gato caça vara',desc:'Varinha com cordão e penas coloridas que imitam um passarinho. O refil troca em segundos, sem ferramenta.',det:['Haste de 60 cm','Cordão de 80 cm','Penas coloridas com sininho'],opt:'Kit',v:[['Com 1 refil','BF-VAR-1',34.9,8.5,80,30,'60 cm'],['Com 3 refis','BF-VAR-3',49.9,12.5,110,20,'60 cm']],pop:9},
+{id:'corda-cabo-guerra',nome:'Corda Cabo de Guerra',cat:'Brinquedos',esp:['cao'],art:'bolinha',cor:'#d9b98b',tags:'corda brinquedo morder cachorro dente cabo de guerra puxar',desc:'Corda de algodão trançada com nós nas pontas, para puxar, buscar e morder. Ajuda a limpar os dentes enquanto o cão brinca.',det:['Corda 100% algodão','Nós reforçados nas pontas','Lavável'],opt:'Tamanho',v:[['P · 25 cm','BF-CRD-P',24.9,6.5,100,25,'25 cm'],['M · 35 cm','BF-CRD-M',29.9,7.5,160,25,'35 cm'],['G · 50 cm','BF-CRD-G',34.9,9,240,12,'50 cm']],pop:8},
+{id:'frisbee-macio',nome:'Frisbee Macio',cat:'Brinquedos',esp:['cao'],art:'tapete',cor:'#ffd23f',tags:'frisbee disco voador brinquedo buscar cachorro amarelo',desc:'Disco amarelo de borracha flexível, que não machuca os dentes nem a boca. Fácil de ver na grama e bom para gastar energia no parque.',det:['Borracha atóxica e flexível','Cor amarela, fácil de achar','Lavável'],opt:'Tamanho',v:[['P · 18 cm','BF-FRI-P',34.9,9,90,18,'18 cm'],['G · 23 cm','BF-FRI-G',39.9,11,130,14,'23 cm']],pop:7},
+{id:'comedouro-ceramica',nome:'Comedouro Patinhas',cat:'Comer e beber',esp:['cao','gato'],art:'comedouro',cor:'#2b2b2b',tags:'comedouro pote tigela bebedouro água ração patinhas preto',desc:'Tigela preta com estampa de patinhas, para ração ou água. Pesada o suficiente para não virar e fácil de lavar.',det:['Tigela preta com patinhas','Pode ir à lava-louças','Fundo antideslizante'],opt:'Capacidade',v:[['300 ml','BF-COM-300',64.9,21,650,11,'13 cm'],['700 ml','BF-COM-700',84.9,29,1000,8,'18 cm']],pop:6},
+{id:'caixinha-surpresa',nome:'Caixinha Surpresa do Mês',cat:'Kits',esp:['cao','gato'],art:'caixa',cor:'#e8553a',tags:'kit caixa caixinha surpresa presente clube mensal assinatura',desc:'Três brinquedos e um acessório escolhidos para o mês, com tema novo todo mês. Ótima para presentear ou para variar a rotina do pet.',det:['3 brinquedos + 1 acessório','Tema novo a cada mês','Valor dos itens avulsos acima de R$ 120'],opt:'Para',v:[['Cão','BF-CXA-CAO',89.9,36,700,20,'30 cm'],['Gato','BF-CXA-GATO',89.9,36,700,20,'30 cm']],pop:8}
+];
+const FOTOS={"bandana-ipe": [["photo-1678203778548-5fa399d8e7fb", "Cachorro usando a bandana verde-limão"], ["photo-1721777436309-a5af4d4a4382", "Bandana verde-limão no pescoço de um cachorro pequeno"]], "coleira-trilha": [["photo-1787548077748-c16cbdaad196", "Coleira de couro vermelha com fivela", 0], ["photo-1546687813-3fcc1c363a07", "Coleira de couro bege", 1]], "guia-passeio": [["photo-1708062270853-ee7c66b69f07", "Guia vermelha impermeável"], ["photo-1708062270783-0e9fa7f4c1c1", "Guia vermelha impermeável sobre pedras"]], "caminha-nuvem": [["photo-1601758123927-4f7acc7da589", "Cachorro deitado na caminha branca"], ["photo-1541188495357-ad2dc89487f4", "Gato dormindo na caminha branca"]], "arranhador-onda": [["photo-1545249390-6bdfa286032f", "Gato no arranhador poste com brinquedo pendurado", 0], ["photo-1538981407342-3f019b72041b", "Gato arranhando a torre com plataforma", 1]], "varinha-penas": [["photo-1744500016693-1c9bcf7bb9ad", "Gato brincando com a varinha de penas"], ["photo-1744710835733-936ab49ee0b4", "Gato tentando pegar as penas da varinha"]], "corda-cabo-guerra": [["photo-1695390966755-117fddeb006e", "Cachorro segurando a corda na boca"], ["photo-1522008693277-086ad6075b78", "Cachorro mordendo a corda"]], "frisbee-macio": [["photo-1647177687075-22d89b33ff62", "Cachorro segurando o frisbee amarelo"], ["photo-1701259065786-44b0006d9620", "Cachorro com o frisbee na boca"]], "comedouro-ceramica": [["photo-1679224106783-c21b1841412a", "Comedouro preto com estampa de patinhas"]], "caixinha-surpresa": [["photo-1587559070757-f72a388edbba", "Cachorro com os brinquedos da caixinha", 0], ["photo-1601758063541-d2f50b4aafb2", "Cachorro deitado com brinquedos", 0], ["photo-1708979346185-5f3235e1becd", "Gato brincando com brinquedo da caixinha", 1]]};
+const fotoUrl=(id,w)=>`https://images.unsplash.com/${id}?auto=format&fit=crop&crop=entropy&w=${w}&h=${w}&q=75`;
+const fotosDe=(p,vi)=>(FOTOS[p.id]||[]).filter(f=>f[2]===undefined||vi===undefined||f[2]===vi);
+function foto(p,vi,i,w){const f=fotosDe(p,vi)[i||0];if(!f)return art(p,p.cor);return`<span class="ph" data-n="${esc(p.nome)}"><img src="${fotoUrl(f[0],w)}" srcset="${fotoUrl(f[0],w*2)} 2x" alt="${esc(f[1])}" loading="lazy" onerror="this.parentNode.classList.add('noimg')"></span>`}
+P.forEach(p=>{p.vars=p.v.map(a=>({nome:a[0],sku:a[1],preco:a[2],custo:a[3],peso:a[4],est0:a[5],med:a[6],cor:a[7]||p.cor}))});
+const RULES={freteGratis:199,freteGratisReg:['MG','SP','RJ','ES','PR','SC','RS'],pix:.05,semJuros:3,parcMin:30,jurosAm:.0249,maxParc:6,imposto:.06,taxaCartao:.045,taxaPix:.01,embalagem:3.5,devol:.02,abandonoSeg:20};
+/* frete saindo de Juiz de Fora/MG: [preço até 1 kg, preço por kg extra, prazo mín., prazo máx. (dias úteis)] */
+const FRETE={JF:[10,2,1,2],MG:[15,3,2,4],RJ:[16,3.5,2,4],ES:[18,4,3,5],SP:[18,4,3,5],PR:[22,5,4,6],SC:[24,5.5,5,7],RS:[26,6,5,8],DF:[24,5.5,4,6],GO:[24,5.5,4,7],MS:[27,6,5,8],MT:[29,6.5,6,9],BA:[25,5.5,4,7],SE:[27,6,5,8],AL:[28,6.5,5,8],PE:[28,6.5,5,8],PB:[29,7,6,9],RN:[30,7,6,9],CE:[31,7.5,6,9],PI:[31,7.5,6,10],MA:[33,8,7,10],TO:[31,7,6,9],PA:[35,9,7,11],AP:[40,10,8,12],AM:[42,11,8,13],RR:[44,11,9,14],RO:[37,9,7,11],AC:[44,11,9,14]};
+const INTERIOR={valor:4,dias:1};
+const CAP={AC:'Rio Branco',AL:'Maceió',AP:'Macapá',AM:'Manaus',BA:'Salvador',CE:'Fortaleza',DF:'Brasília',ES:'Vitória',GO:'Goiânia',MA:'São Luís',MT:'Cuiabá',MS:'Campo Grande',MG:'Belo Horizonte',PA:'Belém',PB:'João Pessoa',PR:'Curitiba',PE:'Recife',PI:'Teresina',RJ:'Rio de Janeiro',RN:'Natal',RS:'Porto Alegre',RO:'Porto Velho',RR:'Boa Vista',SC:'Florianópolis',SP:'São Paulo',SE:'Aracaju',TO:'Palmas'};
+const UFR=[[1000,19999,'SP'],[20000,28999,'RJ'],[29000,29999,'ES'],[30000,39999,'MG'],[40000,48999,'BA'],[49000,49999,'SE'],[50000,56999,'PE'],[57000,57999,'AL'],[58000,58999,'PB'],[59000,59999,'RN'],[60000,63999,'CE'],[64000,64999,'PI'],[65000,65999,'MA'],[66000,68899,'PA'],[68900,68999,'AP'],[69000,69299,'AM'],[69300,69399,'RR'],[69400,69899,'AM'],[69900,69999,'AC'],[70000,72799,'DF'],[72800,72999,'GO'],[73000,73699,'DF'],[73700,76799,'GO'],[76800,76999,'RO'],[77000,77999,'TO'],[78000,78899,'MT'],[79000,79999,'MS'],[80000,87999,'PR'],[88000,89999,'SC'],[90000,99999,'RS']];
+const TEST_CARDS={'4111111111111111':['Visa','ok'],'5555555555554444':['Mastercard','ok'],'4000000000000002':['Visa','recusado'],'4000000000009995':['Visa','antifraude']};
+const CUPONS={VOLTA10:.10};
+
+/* ---------- estado ---------- */
+const K='bf-loja-v1';
+let S;
+const fresh=()=>({avals:[],cepCache:{},cart:[],stock:{},orders:[],emails:[],aband:[],ship:{cep:'',opt:''},cupom:'',viewed:[],consent:null,visits:0,seq:10230,tries:0,reqs:[],ck:{}});
+try{S=Object.assign(fresh(),JSON.parse(localStorage.getItem(K)||'{}'))}catch(e){S=fresh()}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+if(S.consent&&S.consent.med){S.visits++;save()}
+
+/* ---------- utilidades ---------- */
+const $=s=>document.querySelector(s);
+const brl=v=>v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+const byId=id=>P.find(p=>p.id===id);
+const varBySku=sku=>{for(const p of P){const v=p.vars.find(x=>x.sku===sku);if(v)return[p,v]}return[null,null]};
+const stockOf=v=>S.stock[v.sku]!==undefined?S.stock[v.sku]:v.est0;
+const now=()=>Date.now();
+const fmtD=t=>new Date(t).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.h);toast.h=setTimeout(()=>t.style.display='none',2600)};
+const onlyD=s=>String(s).replace(/\D/g,'');
+function bandeiraDe(n){if(/^(636368|438935|504175|451416|636297|5067|4576|4011|506699)/.test(n))return'Elo';if(/^(606282|3841)/.test(n))return'Hipercard';if(/^3[47]/.test(n))return'Amex';if(/^4/.test(n))return'Visa';if(/^(5[1-5]|2[2-7])/.test(n))return'Mastercard';return'Cartão'}
+function luhn(n){let s=0,a=false;for(let i=n.length-1;i>=0;i--){let d=+n[i];if(a){d*=2;if(d>9)d-=9}s+=d;a=!a}return s%10===0}
+function ufDoCep(cep){const n=+onlyD(cep).slice(0,5);const r=UFR.find(x=>n>=x[0]&&n<=x[1]);return r?r[2]:null}
+const CEPPEND={},CEPFALHA={};
+function destino(cep){const c=onlyD(cep);if(c.length!==8)return null;const uf=ufDoCep(c);if(!uf)return null;const v=S.cepCache[c];if(v&&v.erro)return{c,uf,naoExiste:true};const cidade=v?v.localidade:null;const uf2=v&&v.uf?v.uf:uf;const local=cidade?norm(cidade)==='juiz de fora':c.startsWith('360');const capital=cidade?norm(cidade)===norm(CAP[uf2]):null;return{c,uf:uf2,cidade,local,capital,end:v||null,buscando:!!CEPPEND[c],falhou:!!CEPFALHA[c]}}
+function nomeDestino(d){if(d.local)return'Juiz de Fora/MG';return(d.cidade?d.cidade+'/'+d.uf:'Estado: '+d.uf)+(d.capital===true?' (capital)':d.capital===false?' (interior)':'')}
+function buscarCep(cep,mudou,forcar){const c=onlyD(cep);if(c.length!==8||CEPPEND[c])return;if(CEPFALHA[c]&&!forcar)return;if(S.cepCache[c]){if(mudou&&route()==='checkout')aoCep(c,true);return}CEPPEND[c]=1;delete CEPFALHA[c];
+  fetch('https://viacep.com.br/ws/'+c+'/json/').then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>{S.cepCache[c]=j.erro?{erro:true}:{logradouro:j.logradouro||'',bairro:j.bairro||'',localidade:j.localidade||'',uf:j.uf||''};save()}).catch(()=>{CEPFALHA[c]=1}).finally(()=>{delete CEPPEND[c];aoCep(c,true)})}
+function aoCep(c,mudou){if(onlyD(S.ship.cep)!==c)return;const v=S.cepCache[c];if(route()==='checkout'&&$('#f2')){Object.assign(S.ck,collect2());if(v&&!v.erro&&mudou){S.ck.rua=v.logradouro;S.ck.bairro=v.bairro;S.ck.cid=v.localidade;S.ck.uf=v.uf}save();render();const n=$('#ck-num');if(n&&v&&!v.erro&&!n.value)n.focus()}else render()}
+
+/* ---------- carrinho e preços ---------- */
+const cartLines=()=>S.cart.map(l=>{const[p,v]=varBySku(l.sku);return p?{...l,p,v,tot:v.preco*l.q}:null}).filter(Boolean);
+const subtotal=()=>cartLines().reduce((a,l)=>a+l.tot,0);
+const pesoKg=lines=>(lines.reduce((a,l)=>a+l.v.peso*l.q,0)+300)/1000;
+const pz=(a,b)=>a===b?`${a} dia${a>1?'s úteis':' útil'}`:`${a} a ${b} dias úteis`;
+function opcoesFrete(cep,lines,sub){const d=destino(cep);if(!d||d.naoExiste||!lines.length)return[];const F=d.local?FRETE.JF:FRETE[d.uf];const int=d.capital===false&&!d.local;const R=[null,F[0]+(int?INTERIOR.valor:0),F[1],F[2]+(int?INTERIOR.dias:0),F[3]+(int?INTERIOR.dias:0)];const kg=pesoKg(lines);const extra=Math.max(0,Math.ceil(kg)-1);const custo=+(R[1]+extra*R[2]).toFixed(2);const gratis=sub>=RULES.freteGratis&&RULES.freteGratisReg.includes(d.uf);const r=d.local?'local':d.uf;const o=[{id:'eco',nome:'Envio econômico',custo,preco:gratis?0:custo,prazo:pz(R[3]+1,R[4]+1),gratis},{id:'exp',nome:'Envio expresso',custo:+(custo*1.7).toFixed(2),preco:+(custo*1.7).toFixed(2),prazo:pz(Math.max(1,Math.ceil(R[3]/2))+1,Math.max(Math.ceil(R[4]/2)+1,Math.max(1,Math.ceil(R[3]/2))+1))}];if(r==='local')o.push({id:'ret',nome:'Retirar no ateliê (Juiz de Fora)',custo:0,preco:0,prazo:'pronto em 1 dia útil'});return o.map(x=>({...x,reg:r,regNome:nomeDestino(d)}))}
+function totais(pay){const lines=cartLines();const sub=subtotal();const cup=S.cupom&&CUPONS[S.cupom]?+(sub*CUPONS[S.cupom]).toFixed(2):0;const base=sub-cup;const pix=pay==='pix'?+(base*RULES.pix).toFixed(2):0;const ops=opcoesFrete(S.ship.cep,lines,sub);const f=ops.find(o=>o.id===S.ship.opt)||ops[0]||null;if(f&&S.ship.opt!==f.id){S.ship.opt=f.id;save()}const frete=f?f.preco:0;return{lines,sub,cup,pix,frete,f,ops,total:+(base-pix+frete).toFixed(2)}}
+function parcelas(total){const out=[];for(let n=1;n<=RULES.maxParc;n++){if(n>1&&total/n<RULES.parcMin&&n<=RULES.semJuros)continue;if(n<=RULES.semJuros){out.push({n,pm:total/n,tot:total,juros:false})}else{const i=RULES.jurosAm;const pm=total*i/(1-Math.pow(1+i,-n));if(pm<RULES.parcMin)continue;out.push({n,pm,tot:pm*n,juros:true})}}return out}
+function maxSemJuros(preco){let n=1;for(let k=2;k<=RULES.semJuros;k++)if(preco/k>=RULES.parcMin)n=k;return n}
+function updCount(){$('#cartCount').textContent=S.cart.reduce((a,l)=>a+l.q,0)}
+function addCart(sku,q){const[p,v]=varBySku(sku);const ex=S.cart.find(l=>l.sku===sku);const have=ex?ex.q:0;if(have+q>stockOf(v)){toast('Estoque insuficiente para essa quantidade');return false}if(ex)ex.q+=q;else S.cart.push({sku,q});save();updCount();return true}
+
+/* ---------- desenhos ---------- */
+function art(p,cor,view,med){
+  const c=cor||p.cor,ink='#24190f',sh='rgba(36,25,15,.16)';
+  let g='';
+  switch(p.art){
+  case'bandana':{let f='';for(let i=0;i<14;i++){const x=120+((i*53)%160),y=150+((i*37)%110);if(y-150>(x<200?(x-120)*1.4:(280-x)*1.4)+10)continue;f+=`<g transform="translate(${x} ${y})"><circle r="9" fill="#fff8ea"/><circle r="3.5" fill="${ink}"/></g>`}g=`<ellipse cx="200" cy="318" rx="120" ry="16" fill="${sh}"/><path d="M90 130 Q200 160 310 130 L208 300 Q200 312 192 300Z" fill="${c}"/><path d="M90 130 Q200 160 310 130 L300 148 Q200 176 100 148Z" fill="${ink}" opacity=".18"/>${f}<path d="M90 130 Q200 160 310 130" fill="none" stroke="#fff8ea" stroke-width="3" stroke-dasharray="6 6"/><circle cx="300" cy="136" r="7" fill="#fff8ea" stroke="${ink}" stroke-width="2"/>`;break}
+  case'coleira':g=`<ellipse cx="200" cy="300" rx="120" ry="18" fill="${sh}"/><ellipse cx="200" cy="200" rx="118" ry="82" fill="none" stroke="${c}" stroke-width="30"/><ellipse cx="200" cy="200" rx="118" ry="82" fill="none" stroke="#fff8ea" stroke-width="2" stroke-dasharray="7 6"/><rect x="170" y="100" width="60" height="40" rx="6" fill="#c9c3b8" stroke="${ink}" stroke-width="3"/><rect x="186" y="110" width="28" height="20" rx="3" fill="${c}"/><circle cx="200" cy="296" r="20" fill="none" stroke="#c9c3b8" stroke-width="7"/><circle cx="200" cy="330" r="16" fill="#ffb703" stroke="${ink}" stroke-width="3"/>`;break;
+  case'guia':{let r='';for(let i=0;i<5;i++)r+=`<ellipse cx="${190+i*6}" cy="${210-i*4}" rx="${110-i*12}" ry="${64-i*7}" fill="none" stroke="${c}" stroke-width="16"/><ellipse cx="${190+i*6}" cy="${210-i*4}" rx="${110-i*12}" ry="${64-i*7}" fill="none" stroke="${ink}" stroke-opacity=".2" stroke-width="2" stroke-dasharray="3 9"/>`;g=`<ellipse cx="200" cy="300" rx="130" ry="16" fill="${sh}"/>${r}<path d="M300 200 q30 30 20 70" fill="none" stroke="${c}" stroke-width="16"/><rect x="306" y="262" width="26" height="46" rx="10" fill="#c9c3b8" stroke="${ink}" stroke-width="3"/><path d="M319 308 v14 a10 10 0 1 1 -12 8" fill="none" stroke="#c9c3b8" stroke-width="6"/>`;break}
+  case'cama':g=`<ellipse cx="200" cy="300" rx="160" ry="26" fill="${sh}"/><ellipse cx="200" cy="232" rx="160" ry="74" fill="${c}"/><ellipse cx="200" cy="214" rx="160" ry="70" fill="${c}"/><ellipse cx="200" cy="214" rx="160" ry="70" fill="#fff" opacity=".25"/><ellipse cx="200" cy="222" rx="112" ry="44" fill="#fff8ea"/><ellipse cx="200" cy="228" rx="104" ry="36" fill="${c}" opacity=".35"/><path d="M60 196 q140 -60 280 0" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="8 7" opacity=".8"/>`;break;
+  case'arranhador':{let s='';for(let i=0;i<22;i++){const x=70+i*12;s+=`<line x1="${x}" y1="${200+Math.sin((x-70)/41)*30}" x2="${x}" y2="${262+Math.sin((x-70)/41)*30}" stroke="${ink}" stroke-opacity=".25" stroke-width="3"/>`}g=`<ellipse cx="200" cy="306" rx="150" ry="16" fill="${sh}"/><path d="M64 200 ${Array.from({length:28},(_,i)=>`L${64+i*10} ${200+Math.sin(i*10/41)*30}`).join(' ')} L334 ${262+Math.sin(270/41)*30} ${Array.from({length:28},(_,i)=>`L${334-i*10} ${262+Math.sin((270-i*10)/41)*30}`).join(' ')}Z" fill="${c}"/>${s}<path d="M64 200 ${Array.from({length:28},(_,i)=>`L${64+i*10} ${200+Math.sin(i*10/41)*30}`).join(' ')}" fill="none" stroke="#fff8ea" stroke-width="4"/><rect x="250" y="150" width="54" height="34" rx="8" fill="#5f9a4a"/><text x="277" y="172" font-size="13" text-anchor="middle" fill="#fff" font-family="Nunito Sans" font-weight="800">catnip</text>`;break}
+  case'varinha':g=`<ellipse cx="200" cy="320" rx="140" ry="14" fill="${sh}"/><line x1="70" y1="320" x2="250" y2="90" stroke="#c89b63" stroke-width="10" stroke-linecap="round"/><path d="M250 90 q60 20 50 120" fill="none" stroke="${ink}" stroke-width="2" stroke-dasharray="4 4"/>${[0,1,2,3,4].map(i=>`<ellipse cx="300" cy="${226+i*4}" rx="12" ry="46" fill="${['#e8553a','#ffb703','#8ec5e8','#5f9a4a','#e8553a'][i]}" transform="rotate(${-40+i*20} 300 214)"/>`).join('')}<circle cx="300" cy="212" r="10" fill="#ffb703" stroke="${ink}" stroke-width="3"/>`;break;
+  case'bolinha':{let b='';for(let i=0;i<7;i++)b+=`<path d="M${110+i*28} 130 q-30 70 0 140" fill="none" stroke="${['#fff8ea',c,'#ffb703'][i%3]}" stroke-width="18" stroke-linecap="round"/>`;g=`<ellipse cx="200" cy="320" rx="100" ry="16" fill="${sh}"/><clipPath id="bc"><circle cx="200" cy="200" r="100"/></clipPath><circle cx="200" cy="200" r="100" fill="#d9b98b"/><g clip-path="url(#bc)">${b}</g><circle cx="200" cy="200" r="100" fill="none" stroke="${ink}" stroke-opacity=".2" stroke-width="4"/><circle cx="170" cy="168" r="22" fill="#fff" opacity=".25"/>`;break}
+  case'tapete':{let l='';for(let y=0;y<4;y++)for(let x=0;x<7;x++){const cx=96+x*35,cy=168+y*34;l+=`<path d="M${cx} ${cy+12} q-14 -22 0 -34 q14 12 0 34Z" fill="${(x+y)%3?c:'#8bc06e'}"/>`}g=`<ellipse cx="200" cy="320" rx="160" ry="16" fill="${sh}"/><rect x="66" y="140" width="268" height="168" rx="22" fill="#e9dcc1"/><rect x="66" y="140" width="268" height="168" rx="22" fill="none" stroke="${ink}" stroke-opacity=".25" stroke-width="3" stroke-dasharray="8 6"/>${l}<circle cx="160" cy="250" r="7" fill="#c89b63"/><circle cx="246" cy="200" r="7" fill="#c89b63"/>`;break}
+  case'comedouro':g=`<ellipse cx="200" cy="310" rx="140" ry="18" fill="${sh}"/><path d="M80 180 L110 300 Q200 318 290 300 L320 180Z" fill="#fff8ea"/><path d="M80 180 L92 228 Q200 250 308 228 L320 180Z" fill="${c}"/><ellipse cx="200" cy="180" rx="120" ry="30" fill="#f2e6cf"/><ellipse cx="200" cy="184" rx="96" ry="20" fill="#c89b63"/>${[0,1,2,3,4,5].map(i=>`<circle cx="${150+i*20}" cy="${180+(i%2)*6}" r="7" fill="#9b6a3a"/>`).join('')}<path d="M110 300 Q200 318 290 300" fill="none" stroke="${ink}" stroke-opacity=".2" stroke-width="4"/>`;break;
+  case'caixa':g=`<ellipse cx="200" cy="318" rx="150" ry="16" fill="${sh}"/><rect x="80" y="170" width="240" height="140" rx="10" fill="#c89b63"/><rect x="80" y="170" width="240" height="140" rx="10" fill="none" stroke="${ink}" stroke-opacity=".2" stroke-width="3"/><circle cx="140" cy="166" r="34" fill="#d9b98b" stroke="${c}" stroke-width="8"/><path d="M230 170 l30 -80" stroke="#c89b63" stroke-width="7"/><ellipse cx="262" cy="92" rx="10" ry="30" fill="#ffb703" transform="rotate(20 262 92)"/><rect x="70" y="160" width="260" height="34" rx="8" fill="${c}"/><rect x="186" y="160" width="28" height="150" fill="#ffb703"/><text x="200" y="260" text-anchor="middle" font-family="Fredoka" font-size="22" fill="#fff8ea">surpresa</text>`;break;
+  }
+  const bg=`<rect width="400" height="400" fill="var(--sky)"/><circle cx="330" cy="70" r="90" fill="var(--mango2)"/>`;
+  if(view==='b')return`<svg viewBox="110 110 200 200" role="img" aria-label="${esc(p.nome)}, detalhe">${bg}${g}</svg>`;
+  if(view==='c')return`<svg viewBox="0 0 400 400" role="img" aria-label="${esc(p.nome)}, medidas">${bg}<g transform="translate(40 30) scale(.8)">${g}</g><line x1="60" y1="372" x2="340" y2="372" stroke="${ink}" stroke-width="3"/><line x1="60" y1="362" x2="60" y2="382" stroke="${ink}" stroke-width="3"/><line x1="340" y1="362" x2="340" y2="382" stroke="${ink}" stroke-width="3"/><rect x="150" y="356" width="100" height="30" rx="8" fill="var(--sky)"/><text x="200" y="378" text-anchor="middle" font-family="Fredoka" font-size="20" fill="${ink}">${esc(med||'')}</text></svg>`;
+  return`<svg viewBox="0 0 400 400" role="img" aria-label="${esc(p.nome)}">${bg}${g}</svg>`;
+}
+const heroArt=()=>`<svg viewBox="0 0 600 420" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Um cão de bandana e um gato brincando com uma varinha de penas">
+<ellipse cx="300" cy="390" rx="270" ry="22" fill="#24190f" opacity=".13"/>
+<rect x="60" y="330" width="480" height="60" rx="30" fill="#8ec5e8"/><path d="M80 350 q220 -40 440 0" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="9 8" opacity=".8"/>
+<g><path class="wag" d="M310 238 q50 -30 40 -90" fill="none" stroke="#c98a4b" stroke-width="18" stroke-linecap="round"/>
+<ellipse cx="250" cy="270" rx="78" ry="70" fill="#c98a4b"/><ellipse cx="250" cy="290" rx="48" ry="44" fill="#f1d3a8"/>
+<rect x="196" y="300" width="28" height="60" rx="13" fill="#c98a4b"/><rect x="268" y="300" width="28" height="60" rx="13" fill="#b07539"/>
+<ellipse cx="210" cy="360" rx="22" ry="10" fill="#f1d3a8"/><ellipse cx="282" cy="360" rx="22" ry="10" fill="#e0bd8c"/>
+<circle cx="208" cy="168" r="66" fill="#c98a4b"/><ellipse cx="170" cy="196" rx="44" ry="34" fill="#f1d3a8"/><ellipse cx="140" cy="186" rx="15" ry="11" fill="#24190f"/>
+<path d="M236 118 q50 10 40 90 q-30 -10 -40 -90Z" fill="#8a5527"/><circle cx="196" cy="156" r="8" fill="#24190f"/><circle cx="199" cy="153" r="2.5" fill="#fff"/>
+<path d="M150 214 q20 14 40 4" fill="none" stroke="#24190f" stroke-width="4" stroke-linecap="round"/>
+<path d="M162 226 L262 220 L216 290Z" fill="#ffb703" stroke="#24190f" stroke-width="3"/>${[[190,236],[226,234],[212,258],[248,230]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="6" fill="#fff8ea"/><circle cx="${x}" cy="${y}" r="2.4" fill="#24190f"/>`).join('')}</g>
+<g><path d="M470 300 q70 -20 50 -110" fill="none" stroke="#3b3536" stroke-width="16" stroke-linecap="round"/>
+<ellipse cx="440" cy="300" rx="56" ry="58" fill="#3b3536"/><ellipse cx="440" cy="318" rx="30" ry="34" fill="#f4ede2"/>
+<rect x="406" y="320" width="22" height="42" rx="10" fill="#3b3536"/><rect x="452" y="320" width="22" height="42" rx="10" fill="#2c2728"/>
+<circle cx="430" cy="214" r="50" fill="#3b3536"/><path d="M392 196 l-4 -52 38 26Z M468 196 l4 -52 -38 26Z" fill="#3b3536"/><path d="M398 184 l-2 -28 20 14Z M462 184 l2 -28 -20 14Z" fill="#e8553a"/>
+<ellipse cx="412" cy="214" rx="8" ry="11" fill="#ffb703"/><ellipse cx="448" cy="214" rx="8" ry="11" fill="#ffb703"/><ellipse cx="412" cy="215" rx="3" ry="9" fill="#24190f"/><ellipse cx="448" cy="215" rx="3" ry="9" fill="#24190f"/>
+<path d="M425 232 h10 l-5 6z" fill="#e8553a"/><path d="M372 232 h40 M372 242 h40 M448 232 h40 M448 242 h40" stroke="#f4ede2" stroke-width="2"/>
+<line x1="560" y1="40" x2="500" y2="10" stroke="#24190f" stroke-width="6" stroke-linecap="round"/><path d="M560 40 q-40 40 -96 74" fill="none" stroke="#24190f" stroke-width="2" stroke-dasharray="4 4"/>
+${[0,1,2,3].map(i=>`<ellipse cx="462" cy="126" rx="9" ry="30" fill="${['#e8553a','#fff8ea','#8ec5e8','#e8553a'][i]}" transform="rotate(${-50+i*28} 462 112)"/>`).join('')}</g>
+<g><circle cx="110" cy="346" r="30" fill="#d9b98b"/><path d="M90 322 q-12 26 4 50 M112 316 q-12 30 2 60 M132 324 q-10 24 2 44" fill="none" stroke="#e8553a" stroke-width="7" stroke-linecap="round"/></g>
+</svg>`;
+
+/* ---------- recomendação (IA aplicada) ---------- */
+const PAR={coleira:['guia','bandana'],guia:['coleira','bolinha'],bandana:['coleira','caixa'],cama:['tapete','comedouro'],arranhador:['varinha','cama'],varinha:['arranhador','caixa'],bolinha:['guia','tapete'],tapete:['comedouro','bolinha'],comedouro:['tapete','cama'],caixa:['bandana','varinha']};
+function recomendar(baseIds,n){const personal=S.consent&&S.consent.pers;const inCart=new Set(cartLines().map(l=>l.p.id));const seeds=(personal?[...baseIds,...S.viewed]:baseIds).map(byId).filter(Boolean);
+  const sc=P.filter(p=>!inCart.has(p.id)&&!baseIds.includes(p.id)).map(p=>{let s=p.pop/10;for(const q of seeds){if(p.esp.some(e=>q.esp.includes(e)))s+=1;if((PAR[q.art]||[]).includes(p.art))s+=2;if(q.id===p.id)s-=3}return{p,s}});
+  return{list:sc.sort((a,b)=>b.s-a.s).slice(0,n).map(x=>x.p),personal}}
+function recBlock(baseIds,title){const r=recomendar(baseIds,4);return`<section class="band"><div class="wrap"><h2>${r.personal||baseIds.length?title:'Os mais vendidos'}</h2><div class="grid">${r.list.map(card).join('')}</div><details class="why"><summary>Por que estou vendo estas sugestões?</summary><p>${r.personal?'Usamos os produtos que você viu nesta visita e os que estão no carrinho para sugerir itens que combinam, para a mesma espécie de pet. Base legal: seu consentimento nos cookies de personalização, que você pode retirar em Preferências de cookies.':'Você não ativou os cookies de personalização, então mostramos sugestões gerais'+(baseIds.length?' ligadas apenas ao produto desta página':' por popularidade')+'. Nenhum histórico de navegação é usado.'}</p></details></div></section>`}
+
+/* ---------- componentes ---------- */
+function card(p){const min=Math.min(...p.vars.map(v=>v.preco));const n=maxSemJuros(min);return`<a class="card" href="#p-${p.id}"><div class="pic">${foto(p,0,0,400)}</div><div class="info"><div>${p.esp.map(e=>`<span class="tag">${e==='cao'?'Cães':'Gatos'}</span>`).join('')}</div><span class="nm">${esc(p.nome)}</span><span class="pr">${p.vars.length>1&&new Set(p.vars.map(v=>v.preco)).size>1?'<small style="font-size:15px">a partir de </small>':''}${brl(min)}</span><span class="px">${brl(min*(1-RULES.pix))} no Pix · ${n>1?n+'x sem juros':'à vista no cartão'}</span></div></a>`}
+const crumbs=a=>`<div class="crumbs">${a.map(x=>x[1]?`<a href="#${x[1]}">${esc(x[0])}</a>`:esc(x[0])).join(' / ')}</div>`;
+
+/* ---------- páginas ---------- */
+const V={};
+V.inicio=()=>`<section class="hero band"><div class="wrap"><div><h1>Acessórios e brinquedos feitos à mão para cães e gatos</h1><p class="lead">Costurados em pequenos lotes em Juiz de Fora, com materiais seguros para morder e arranhar, troca de tamanho grátis e envio em até 2 dias úteis.</p><div style="display:flex;gap:10px;flex-wrap:wrap"><a class="btn" href="#loja">Ver a loja</a><a class="btn alt" style="border-color:#24190f;color:#24190f" href="#gatos">Para gatos</a></div></div><div class="fig">${heroArt()}</div></div></section>
+<div class="wrap perks"><div><b>Frete grátis acima de R$ 199</b>no envio econômico para Sudeste e Sul</div><div><b>5% off no Pix</b>desconto aplicado no checkout</div><div><b>Até 3x sem juros</b>no cartão, parcela mínima de R$ 30</div><div><b>Troca de tamanho grátis</b>em até 30 dias, a primeira é por nossa conta</div></div>
+<section class="band"><div class="wrap"><h2>Mais procurados</h2><div class="grid">${[...P].sort((a,b)=>b.pop-a.pop).slice(0,8).map(card).join('')}</div></div></section>
+<section class="band" style="padding-top:0"><div class="wrap"><div class="club"><div><h2>Caixinha Surpresa do Mês</h2><p>Três brinquedos e um acessório com tema novo todo mês, para cão ou para gato. Quem compra a caixinha recebe um lembrete quando o tema do mês seguinte sai.</p><p class="disp" style="font-size:30px">${brl(89.9)}</p><a class="btn" href="#p-caixinha-surpresa">Quero a caixinha</a></div><div class="pic">${art(byId('caixinha-surpresa'))}</div></div></div></section>
+${recBlock([],'Escolhidos para você')}`;
+function loja(filtro){return()=>{const f=V.f||{cat:'Todos',ord:'rel'};let list=P.filter(p=>!filtro||p.esp.includes(filtro));if(f.cat!=='Todos')list=list.filter(p=>p.cat===f.cat);const mp=p=>Math.min(...p.vars.map(v=>v.preco));if(f.ord==='menor')list.sort((a,b)=>mp(a)-mp(b));else if(f.ord==='maior')list.sort((a,b)=>mp(b)-mp(a));else list.sort((a,b)=>b.pop-a.pop);const cats=['Todos',...new Set(P.map(p=>p.cat))];
+  return`<section class="band"><div class="wrap">${crumbs([['Início','inicio'],[filtro==='cao'?'Para cães':filtro==='gato'?'Para gatos':'Todos os produtos']])}<h1 style="margin-bottom:18px">${filtro==='cao'?'Para cães':filtro==='gato'?'Para gatos':'Todos os produtos'}</h1><div class="filters">${cats.map(c=>`<button class="chip ${f.cat===c?'on':''}" data-act="fcat" data-v="${c}">${c}</button>`).join('')}<label style="margin:0 0 0 auto;display:flex;align-items:center;gap:8px">Ordenar <select id="ord" style="width:auto"><option value="rel" ${f.ord==='rel'?'selected':''}>Mais vendidos</option><option value="menor" ${f.ord==='menor'?'selected':''}>Menor preço</option><option value="maior" ${f.ord==='maior'?'selected':''}>Maior preço</option></select></label></div><p class="note">${list.length} produto${list.length!==1?'s':''}</p>${list.length?`<div class="grid">${list.map(card).join('')}</div>`:'<div class="empty"><p>Nenhum produto nesta categoria.</p></div>'}</div></section>`}}
+V.loja=loja(null);V.caes=loja('cao');V.gatos=loja('gato');
+const SIN={cachorro:'cao',cachorros:'cao',cao:'cao',caes:'cao',dog:'cao',gato:'gato',gatos:'gato',gatinho:'gato',cama:'caminha',pote:'comedouro',tigela:'comedouro',bola:'brinquedo',disco:'frisbee',corda:'corda',puxar:'corda',lenco:'bandana',colar:'coleira',coleiras:'coleira',arranhar:'arranhador',unha:'arranhador',pena:'penas',brinquedos:'brinquedo',kit:'caixinha',presente:'presente'};
+function buscar(q){const ts=norm(q).split(/\s+/).filter(Boolean).map(t=>SIN[t]||t);if(!ts.length)return[];return P.map(p=>{const hay=norm([p.nome,p.tags,p.desc,p.cat,p.esp.map(e=>e==='cao'?'cao cachorro':'gato').join(' '),p.vars.map(v=>v.sku+' '+v.nome).join(' ')].join(' '));let s=0;for(const t of ts){if(norm(p.nome).includes(t))s+=3;else if(hay.includes(t))s+=1;else if(t.length>3&&hay.includes(t.slice(0,-1)))s+=.5;else return null}return{p,s}}).filter(Boolean).sort((a,b)=>b.s-a.s).map(x=>x.p)}
+V.busca=()=>{const q=V.q||'';const r=buscar(q);return`<section class="band"><div class="wrap">${crumbs([['Início','inicio'],['Busca']])}<h1 style="margin-bottom:10px">Resultados para “${esc(q)}”</h1><p class="note">${r.length} produto${r.length!==1?'s':''} encontrado${r.length!==1?'s':''}. A busca ignora acentos e entende sinônimos como cachorro, cama e pote.</p>${r.length?`<div class="grid">${r.map(card).join('')}</div>`:`<div class="empty"><p>Não achamos nada para “${esc(q)}”.</p><p>Tente “bandana”, “arranhador” ou “cama”.</p><a class="btn" href="#loja">Ver todos os produtos</a></div>`}</div></section>`};
+function produto(id){const p=byId(id);if(!p)return`<section class="band"><div class="wrap empty"><h1>Produto não encontrado</h1><a class="btn" href="#loja">Voltar à loja</a></div></section>`;
+  if(!S.viewed.includes(id)&&S.consent&&S.consent.pers){S.viewed=[id,...S.viewed].slice(0,6);save()}
+  const st=V.ps&&V.ps.id===id?V.ps:(V.ps={id,vi:Math.max(0,p.vars.findIndex(v=>stockOf(v)>0)),img:0,q:1});const v=p.vars[st.vi];const est=stockOf(v);const n=maxSemJuros(v.preco);
+  return`<section class="band"><div class="wrap">${crumbs([['Início','inicio'],['Loja','loja'],[p.nome]])}<div class="pp"><div class="gal"><div class="main">${foto(p,st.vi,st.img,700)}</div><div class="thumbs">${fotosDe(p,st.vi).length>1?fotosDe(p,st.vi).map((f,k)=>`<button class="${st.img===k?'on':''}" data-act="img" data-v="${k}" aria-label="Foto ${k+1}">${foto(p,st.vi,k,180)}</button>`).join(''):''}</div><p class="note" style="margin-top:8px">Foto ilustrativa do produto.</p></div>
+  <div><div>${p.esp.map(e=>`<span class="tag">${e==='cao'?'Cães':'Gatos'}</span>`).join('')}<span class="tag">${p.cat}</span></div><h1 style="margin:10px 0 6px">${esc(p.nome)}</h1><p class="note">SKU ${v.sku}</p><div class="price">${brl(v.preco)}</div><p style="margin-top:6px">${brl(v.preco*(1-RULES.pix))} no Pix (5% off) · ${n>1?`${n}x de ${brl(v.preco/n)} sem juros`:'à vista no cartão'}</p>
+  <label style="margin-top:14px">${p.opt}: ${esc(v.nome)}</label><div class="opts">${p.vars.map((x,i)=>`<button class="opt ${i===st.vi?'on':''}" data-act="var" data-v="${i}" ${stockOf(x)<=0?'disabled':''}>${esc(x.nome)}</button>`).join('')}</div>
+  <p class="stock ${est<=5?'low':''}">${est<=0?'Esgotado':est<=5?`Últimas ${est} unidades`:`Em estoque: ${est} unidades`}</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:stretch;margin:12px 0"><div class="qty"><button data-act="pq" data-v="-1" aria-label="Diminuir">−</button><span>${st.q}</span><button data-act="pq" data-v="1" aria-label="Aumentar">+</button></div><button class="btn mango" data-act="add" ${est<=0?'disabled':''} style="flex:1">Adicionar ao carrinho</button></div>
+  <div class="box" style="margin:14px 0"><form id="pcep" style="display:flex;gap:8px;flex-wrap:wrap"><label for="pcepi" style="flex-basis:100%;margin:0">Calcular frete e prazo</label><input id="pcepi" inputmode="numeric" placeholder="00000-000" value="${esc(S.ship.cep)}" style="flex:1;min-width:140px"><button class="btn sm alt" type="submit">Calcular</button></form><div id="pcepr" style="margin-top:8px"></div></div>
+  <h3 style="margin-top:20px">Descrição</h3><p>${esc(p.desc)}</p><ul>${p.det.map(d=>`<li>${esc(d)}</li>`).join('')}<li>Medida de referência (${esc(v.nome)}): ${esc(v.med)}</li></ul><p class="note">Troca de tamanho grátis em até 30 dias. Direito de arrependimento em 7 dias. <a href="#trocas">Ver política</a></p></div></div></div></section>${recBlock([id],'Combina com este produto')}`}
+function cepInfo(d){const e=d.end;return`<p class="note" style="margin-bottom:8px">${d.buscando?'Buscando o endereço do CEP…':`Entrega para <b>${esc(nomeDestino(d))}</b>${e&&e.logradouro?' · '+esc(e.logradouro)+(e.bairro?', '+esc(e.bairro):''):''}`} (CEP ${esc(fmtCep(d.c))})${d.falhou?'. Não deu para consultar o endereço agora; o frete foi calculado pelo estado.':''}</p>`}
+function shipBox(sub){const lines=cartLines();const ops=opcoesFrete(S.ship.cep,lines,sub);if(!S.ship.cep)return'';const d=destino(S.ship.cep);if(!d)return'<p class="err">CEP inválido. Use os 8 números do CEP.</p>';if(d.naoExiste)return'<p class="err">CEP não encontrado. Confira os números.</p>';if(ops.length&&!ops.find(o=>o.id===S.ship.opt)){S.ship.opt=ops[0].id;save()}return`${cepInfo(d)}${ops.map(o=>`<label class="shipopt ${S.ship.opt===o.id?'on':''}"><input type="radio" name="ship" value="${o.id}" ${S.ship.opt===o.id?'checked':''}><span style="flex:1"><b>${o.nome}</b><br><small>${o.prazo}</small></span><b>${o.preco===0?'Grátis':brl(o.preco)}</b></label>`).join('')}`}
+V.carrinho=()=>{const t=totais('cartao');if(!t.lines.length)return`<section class="band"><div class="wrap empty"><h1>Seu carrinho está vazio</h1><p>Que tal uma bandana ou uma bolinha de corda?</p><a class="btn" href="#loja">Ver produtos</a></div></section>${recBlock([],'Escolhidos para você')}`;
+  const dd=destino(S.ship.cep);const r=dd&&!dd.naoExiste;const elig=!r||RULES.freteGratisReg.includes(dd.uf);const falta=RULES.freteGratis-(t.sub-t.cup);
+  return`<section class="band"><div class="wrap">${crumbs([['Início','inicio'],['Carrinho']])}<h1 style="margin-bottom:14px">Carrinho</h1><div class="cartgrid"><div>
+  ${elig?`<div class="box" style="margin-bottom:10px">${falta>0?`Faltam <b>${brl(falta)}</b> para o frete grátis${r?'':' (Sudeste e Sul)'}`:'<b>Você ganhou frete grátis</b> no envio econômico'}<div class="bar"><i style="width:${Math.min(100,(t.sub-t.cup)/RULES.freteGratis*100)}%"></i></div></div>`:''}
+  ${t.lines.map(l=>`<div class="citem"><a class="pic" href="#p-${l.p.id}">${foto(l.p,l.p.vars.indexOf(l.v),0,170)}</a><div><b>${esc(l.p.nome)}</b><div class="note">${l.p.opt}: ${esc(l.v.nome)} · SKU ${l.v.sku}</div><div class="note">${brl(l.v.preco)} cada</div></div><div class="act" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><div class="qty"><button data-act="cq" data-sku="${l.sku}" data-v="-1" aria-label="Diminuir">−</button><span>${l.q}</span><button data-act="cq" data-sku="${l.sku}" data-v="1" aria-label="Aumentar">+</button></div><b class="disp" style="font-size:20px;white-space:nowrap">${brl(l.tot)}</b><button class="btn sm alt" data-act="rm" data-sku="${l.sku}">Remover</button></div></div>`).join('')}
+  <div class="box" style="margin-top:18px"><form id="ccep" style="display:flex;gap:8px;flex-wrap:wrap"><label for="ccepi" style="flex-basis:100%;margin:0">Frete e prazo</label><input id="ccepi" inputmode="numeric" placeholder="00000-000" value="${esc(S.ship.cep)}" style="flex:1;min-width:140px"><button class="btn sm alt" type="submit">Calcular</button></form><div style="margin-top:10px">${shipBox(t.sub)}</div></div>
+  <div class="box" style="margin-top:12px"><form id="cupf" style="display:flex;gap:8px;flex-wrap:wrap"><label for="cupi" style="flex-basis:100%;margin:0">Cupom de desconto</label><input id="cupi" value="${esc(S.cupom)}" placeholder="Ex.: VOLTA10" style="flex:1;min-width:140px;text-transform:uppercase"><button class="btn sm alt" type="submit">Aplicar</button></form>${S.cupom?`<p class="note" style="margin-top:6px">Cupom ${esc(S.cupom)} aplicado. <a href="#carrinho" data-act="nocup">Remover</a></p>`:''}</div>
+  </div><aside class="box sticky sum"><h3>Resumo</h3><div><span>Produtos</span><span>${brl(t.sub)}</span></div>${t.cup?`<div><span>Cupom ${S.cupom}</span><span>− ${brl(t.cup)}</span></div>`:''}<div><span>Frete</span><span>${t.f?(t.frete?brl(t.frete):'Grátis'):'informe o CEP'}</span></div><div class="tot"><span>Total</span><span>${brl(t.total)}</span></div><p class="note">No Pix: ${brl(t.total-(t.sub-t.cup)*RULES.pix)} (5% off nos produtos)</p><button class="btn mango" style="width:100%" data-act="gocheck" ${t.f?'':'disabled'}>Finalizar compra</button><p class="note" style="margin-top:8px">${t.f?'Compra sem cadastro: você não precisa criar conta.':'Calcule o frete para continuar.'}</p></aside></div></div></section>${recBlock(t.lines.map(l=>l.p.id),'Leve junto')}`};
+/* checkout */
+let CK={step:1,pay:'pix',err:{},parc:1};
+V.checkout=()=>{const t=totais(CK.pay);if(!t.lines.length){location.hash='carrinho';return''}if(!t.f){location.hash='carrinho';return''}
+  const d=S.ck;const e=CK.err;{const v=S.cepCache[onlyD(S.ship.cep)];if(v&&!v.erro&&CK.step===2){if(!d.rua&&v.logradouro)d.rua=v.logradouro;if(!d.bairro&&v.bairro)d.bairro=v.bairro;if(!d.cid)d.cid=v.localidade;if(!d.uf)d.uf=v.uf}}const E=k=>e[k]?`<div class="err">${e[k]}</div>`:'';const pc=parcelas(t.total);
+  const s1=`<div class="step ${CK.step>1?'done':''}"><h3>Identificação</h3>${CK.step>1?`<p>${esc(d.nome)} · ${esc(d.email)} <button class="btn sm alt" data-act="ckstep" data-v="1">Alterar</button></p>`:`<p class="note">Compra sem cadastro: só precisamos destes dados para entregar e mandar a confirmação do pedido. Use um e-mail real: a confirmação chega na sua caixa de entrada.</p><form id="f1" novalidate><div class="fld"><label for="ck-email">E-mail</label><input id="ck-email" type="email" autocomplete="email" value="${esc(d.email||'')}">${E('email')}</div><div class="fld"><label for="ck-nome">Nome completo</label><input id="ck-nome" autocomplete="name" value="${esc(d.nome||'')}">${E('nome')}</div><div class="fld"><label for="ck-tel">Celular</label><input id="ck-tel" type="tel" autocomplete="tel" value="${esc(d.tel||'')}">${E('tel')}</div><label class="ck" style="font-weight:400"><input type="checkbox" id="ck-mkt" ${d.mkt?'checked':''}><span>Quero receber novidades e ofertas por e-mail (opcional, posso cancelar quando quiser).</span></label><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="submit">Continuar</button></div></form>`}</div>`;
+  const s2=`<div class="step ${CK.step>2?'done':CK.step<2?'off':''}"><h3>Entrega</h3>${CK.step===2?`<form id="f2" novalidate><div class="row2"><div class="fld"><label for="ck-cep">CEP</label><input id="ck-cep" inputmode="numeric" value="${esc(S.ship.cep)}">${E('cep')}</div><div class="fld"><label for="ck-uf">Estado (UF)</label><input id="ck-uf" maxlength="2" value="${esc(d.uf||'')}" style="text-transform:uppercase">${E('uf')}</div></div><div class="fld"><label for="ck-rua">Rua</label><input id="ck-rua" autocomplete="address-line1" value="${esc(d.rua||'')}">${E('rua')}</div><div class="row2"><div class="fld"><label for="ck-num">Número</label><input id="ck-num" value="${esc(d.num||'')}">${E('num')}</div><div class="fld"><label for="ck-comp">Complemento (opcional)</label><input id="ck-comp" value="${esc(d.comp||'')}"></div></div><div class="row2"><div class="fld"><label for="ck-bairro">Bairro</label><input id="ck-bairro" value="${esc(d.bairro||'')}">${E('bairro')}</div><div class="fld"><label for="ck-cid">Cidade</label><input id="ck-cid" value="${esc(d.cid||'')}">${E('cid')}</div></div><div id="ckship">${shipBox(t.sub)}</div><button class="btn" type="submit">Continuar para o pagamento</button></form>`:CK.step>2?`<p>${esc(d.rua)}, ${esc(d.num)}${d.comp?' · '+esc(d.comp):''} · ${esc(d.bairro)} · ${esc(d.cid)}/${esc(d.uf)} · CEP ${esc(S.ship.cep)}<br>${t.f.nome}: ${t.f.prazo} <button class="btn sm alt" data-act="ckstep" data-v="2">Alterar</button></p>`:''}</div>`;
+  const s3=`<div class="step ${CK.step<3?'off':''}"><h3>Pagamento</h3>${CK.step===3?`<p class="note">O número do cartão não fica guardado na loja: registramos só os 4 últimos dígitos.</p><div class="paytabs"><button class="chip ${CK.pay==='pix'?'on':''}" data-act="pay" data-v="pix">Pix · 5% off</button><button class="chip ${CK.pay==='cartao'?'on':''}" data-act="pay" data-v="cartao">Cartão de crédito</button></div>
+  ${CK.pay==='pix'?`<p>Você paga <b>${brl(t.total)}</b> com o desconto de 5% nos produtos. O QR Code aparece na próxima tela e vale por 30 minutos.</p>`:`<form id="f3c" novalidate><div class="fld"><label for="cc-num">Número do cartão</label><input id="cc-num" inputmode="numeric" autocomplete="off" placeholder="4111 1111 1111 1111" value="${esc(CK.cc||'')}">${E('cc')}</div><div class="row2"><div class="fld"><label for="cc-nome">Nome impresso</label><input id="cc-nome" autocomplete="off" value="${esc(CK.ccn||'')}">${E('ccn')}</div><div class="fld"><label for="cc-val">Validade (MM/AA)</label><input id="cc-val" inputmode="numeric" placeholder="12/30" value="${esc(CK.ccv||'')}">${E('ccv')}</div><div class="fld"><label for="cc-cvv">CVV</label><input id="cc-cvv" inputmode="numeric" maxlength="4" autocomplete="off">${E('cvv')}</div></div><div class="fld"><label for="cc-parc">Parcelas</label><select id="cc-parc">${pc.map(x=>`<option value="${x.n}" ${CK.parc==x.n?'selected':''}>${x.n}x de ${brl(x.pm)} ${x.juros?`com juros (total ${brl(x.tot)})`:'sem juros'}</option>`).join('')}</select><p class="note" style="margin-top:4px">Até 3x sem juros com parcela mínima de R$ 30. De 4x a 6x, juros de 2,49% ao mês.</p></div></form>`}
+  <label class="ck" style="font-weight:400"><input type="checkbox" id="ck-ok" ${CK.ok?'checked':''}><span>Li e concordo com a <a href="#trocas">Política de trocas</a> e a <a href="#privacidade">Política de privacidade</a>.</span></label>${E('ok')}${CK.payErr?`<div class="alert bad">${CK.payErr}</div>`:''}<button class="btn mango" style="width:100%;margin-top:6px" data-act="pagar">${CK.pay==='pix'?'Gerar Pix de '+brl(t.total):'Pagar '+brl(t.total)}</button>`:''}</div>`;
+  return`<section class="band"><div class="wrap">${crumbs([['Carrinho','carrinho'],['Finalizar compra']])}<h1 style="margin-bottom:14px">Finalizar compra</h1><div class="cartgrid"><div class="steps">${s1}${s2}${s3}</div><aside class="box sticky sum"><h3>Seu pedido</h3>${t.lines.map(l=>`<div><span>${l.q}× ${esc(l.p.nome)} <small class="note">(${esc(l.v.nome)})</small></span><span>${brl(l.tot)}</span></div>`).join('')}<div style="border-top:1px solid var(--line);margin-top:6px"><span>Produtos</span><span>${brl(t.sub)}</span></div>${t.cup?`<div><span>Cupom ${S.cupom}</span><span>− ${brl(t.cup)}</span></div>`:''}${t.pix?`<div><span>Desconto Pix (5%)</span><span>− ${brl(t.pix)}</span></div>`:''}<div><span>Frete (${t.f.nome.toLowerCase()})</span><span>${t.frete?brl(t.frete):'Grátis'}</span></div><div class="tot"><span>Total</span><span>${brl(t.total)}</span></div><p class="note">Prazo: ${t.f.prazo} após a confirmação do pagamento. O total já inclui o frete.</p></aside></div></div></section>`};
+/* confirmação */
+function pedido(num){const o=S.orders.find(x=>x.num.toLowerCase()===num);if(!o)return`<section class="band"><div class="wrap empty"><h1>Pedido não encontrado</h1><a class="btn" href="#loja">Voltar à loja</a></div></section>`;
+  const pill=statusPill(o);
+  return`<section class="band"><div class="wrap" style="max-width:900px">${o.status==='pago'||o.status==='enviado'||o.status==='entregue'?'<div class="alert ok"><b>Pagamento aprovado.</b> Enviamos a confirmação para o seu e-mail.</div>':o.status==='aguardando'?'<div class="alert warn"><b>Aguardando o pagamento do Pix.</b></div>':o.status==='analise'?'<div class="alert warn"><b>Pedido recebido. O pagamento está em análise de segurança</b> e a resposta chega por e-mail em até 2 horas.</div>':o.status==='recusado'?'<div class="alert bad"><b>Pagamento não aprovado pela análise de segurança.</b> Nada foi cobrado.</div>':''}
+  <h1>Pedido ${o.num}</h1><p style="margin-top:8px">${pill} · feito em ${fmtD(o.at)} · ${esc(o.cli.email)}</p>
+  ${o.status==='aguardando'?`<div class="box" style="display:flex;gap:20px;flex-wrap:wrap;align-items:center;margin:16px 0"><div class="qr">${qr(o.num)}</div><div style="flex:1;min-width:220px"><h3>Pague com Pix</h3><p>Abra o app do banco, escolha Pix e leia o QR Code, ou use o código copia e cola. Valor: <b>${brl(o.total)}</b>. Expira em 30 minutos.</p><code class="cc">${pixCode(o)}</code><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn sm alt" data-act="copy" data-v="${pixCode(o)}">Copiar código</button><button class="btn sm mango" data-act="pixpay" data-v="${o.num}">Já fiz o pagamento</button></div></div></div>`:''}
+  <div class="box" style="margin-top:16px"><div class="scroll"><table class="stack"><thead><tr><th>Produto</th><th>SKU</th><th class="n">Qtd.</th><th class="n">Valor</th></tr></thead><tbody>${o.itens.map(i=>`<tr><td>${esc(i.nome)} (${esc(i.var)})</td><td>${i.sku}</td><td class="n">${i.q}</td><td class="n">${brl(i.preco*i.q)}</td></tr>`).join('')}</tbody></table></div><div class="sum" style="max-width:360px;margin-left:auto;margin-top:10px"><div><span>Produtos</span><span>${brl(o.sub)}</span></div>${o.cup?`<div><span>Cupom</span><span>− ${brl(o.cup)}</span></div>`:''}${o.pixd?`<div><span>Desconto Pix</span><span>− ${brl(o.pixd)}</span></div>`:''}<div><span>Frete</span><span>${o.frete?brl(o.frete):'Grátis'}</span></div><div class="tot"><span>Total</span><span>${brl(o.total)}</span></div>${o.parc>1?`<p class="note">${o.parc}x de ${brl(o.pm)} no cartão final ${o.last4}</p>`:o.pay==='cartao'?`<p class="note">À vista no cartão final ${o.last4}</p>`:''}</div></div>
+  <div class="row2" style="margin-top:14px;gap:14px"><div class="box"><h3>Entrega</h3><p>${esc(o.end)}<br>${o.envio.nome}: ${o.envio.prazo}${o.rastreio?`<br>Rastreio: <b>${o.rastreio}</b>`:''}</p></div><div class="box"><h3>E-mail de confirmação</h3>${statusMail(o)}<p class="note">Você também recebe e-mails quando o pedido for enviado e quando for entregue.</p><a class="btn sm" href="#rastreio-${o.num.toLowerCase()}">Acompanhar pedido</a></div></div></div></section>`}
+function qr(seed){let s=0;for(const c of seed)s=(s*31+c.charCodeAt(0))%2147483647||7;const N=25,c=8;let r='';const fin=(x,y)=>`<rect x="${x*c}" y="${y*c}" width="${7*c}" height="${7*c}" fill="#000"/><rect x="${(x+1)*c}" y="${(y+1)*c}" width="${5*c}" height="${5*c}" fill="#fff"/><rect x="${(x+2)*c}" y="${(y+2)*c}" width="${3*c}" height="${3*c}" fill="#000"/>`;for(let y=0;y<N;y++)for(let x=0;x<N;x++){if((x<8&&y<8)||(x>16&&y<8)||(x<8&&y>16))continue;s=s*16807%2147483647;if(s%2)r+=`<rect x="${x*c}" y="${y*c}" width="${c}" height="${c}" fill="#000"/>`}return`<svg viewBox="0 0 200 200" role="img" aria-label="QR Code do Pix">${r}${fin(0,0)}${fin(18,0)}${fin(0,18)}</svg>`}
+const pixCode=o=>`00020126580014BR.GOV.BCB.PIX0136bigodeefocinho-${o.num.toLowerCase()}52040000530398654${String(o.total.toFixed(2).length).padStart(2,"0")}${o.total.toFixed(2)}5802BR5916BIGODE E FOCINHO6012JUIZ DE FORA62070503***6304A1B2`;
+function statusMail(o){const c=S.emails.find(x=>x.order===o.num&&x.kind==='conf');if(!c)return'<p>Sem registro de envio neste navegador.</p>';if(c.st==='enviado')return`<p><span class="pill ok">Enviado</span> para <b>${esc(o.cli.email)}</b>. Se não aparecer em alguns minutos, olhe a caixa de spam.</p>`;if(c.st==='na fila')return`<p><span class="pill info">Enviando…</span> para ${esc(o.cli.email)}</p>`;return`<p><span class="pill bad">Não enviado</span> ${esc(c.st)}</p>`}
+function statusPill(o){const m={aguardando:['warn','Aguardando Pix'],analise:['warn','Em análise antifraude'],pago:['ok','Pago'],enviado:['info','Enviado'],entregue:['ok','Entregue'],recusado:['bad','Recusado']}[o.status];return`<span class="pill ${m[0]}">${m[1]}</span>`}
+
+/* ---------- e-mails ---------- */
+const CFG=window.LOJA_CONFIG||{};
+const emailPronto=()=>!!(CFG.publicKey&&CFG.serviceId&&CFG.templateId)&&!/COLE_AQUI/.test(CFG.publicKey+CFG.serviceId+CFG.templateId);
+const BASE=()=>location.href.split('#')[0];
+const SKUS=P.flatMap(p=>p.vars.map(v=>v.sku));
+const btnMail=(href,txt)=>`<p style="margin:18px 0"><a href="${href}" style="background:#ffb703;color:#24190f;text-decoration:none;font-weight:bold;padding:12px 18px;border-radius:10px;display:inline-block">${txt}</a></p>`;
+function wrapMail(subject,body,kind){return`<div style="font-family:Arial,Helvetica,sans-serif;max-width:560px;margin:0 auto;color:#24190f;font-size:15px;line-height:1.5"><div style="background:#ffb703;padding:16px 20px;border-radius:12px 12px 0 0;font-size:20px;font-weight:bold">Bigode &amp; Focinho</div><div style="padding:20px;border:1px solid #eadfce;border-top:0;border-radius:0 0 12px 12px"><h2 style="font-size:19px;margin:0 0 12px">${esc(subject)}</h2>${body}<p style="font-size:12px;color:#6d5f52;border-top:1px solid #eadfce;padding-top:10px;margin-top:20px">Bigode &amp; Focinho · <a href="${BASE()}" style="color:#6d5f52">visitar a loja</a>${kind==='aband'||kind==='recompra'?` · <a href="${BASE()}#privacidade" style="color:#6d5f52">não quero mais receber lembretes</a>`:''}<br>Loja criada para um trabalho acadêmico. Nenhuma cobrança real é feita.</p></div></div>`}
+const FILA=[];let enviando=false;
+function mail(to,subject,kind,body,extra){if(!to)return null;const m={id:'m'+now()+Math.floor(Math.random()*999),to,subject,kind,at:now(),st:'na fila',...(extra||{})};S.emails.unshift(m);S.emails=S.emails.slice(0,80);save();FILA.push({id:m.id,html:wrapMail(subject,body,kind)});processar();return m}
+async function processar(){if(enviando)return;enviando=true;
+  while(FILA.length){const{id,html}=FILA.shift();const m=S.emails.find(x=>x.id===id);if(!m)continue;
+    if(!emailPronto()){m.st='não enviado: EmailJS não configurado';save();continue}
+    try{const r=await fetch('https://api.emailjs.com/api/v1.0/email/send',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({service_id:CFG.serviceId,template_id:CFG.templateId,user_id:CFG.publicKey,template_params:{to_email:m.to,subject:m.subject,message_html:html,reply_to:CFG.lojaEmail||''}})});const t=await r.text();m.st=r.ok?'enviado':'erro: '+t.slice(0,140)}catch(err){m.st='erro de conexão com o EmailJS'}
+    save();const rt=route();if(rt==='painel'||rt.startsWith('pedido-'))render();
+    await new Promise(ok=>setTimeout(ok,1100))}
+  enviando=false}
+const tdL='style="padding:6px 0;border-bottom:1px solid #eadfce"',tdR='style="padding:6px 0;border-bottom:1px solid #eadfce;text-align:right;white-space:nowrap"';
+const itensTxt=o=>`<table style="width:100%;border-collapse:collapse;margin:10px 0">${o.itens.map(i=>`<tr><td ${tdL}>${i.q}× ${esc(i.nome)} (${esc(i.var)})</td><td ${tdR}>${brl(i.preco*i.q)}</td></tr>`).join('')}${o.cup?`<tr><td ${tdL}>Cupom ${esc(o.cupom)}</td><td ${tdR}>− ${brl(o.cup)}</td></tr>`:''}${o.pixd?`<tr><td ${tdL}>Desconto Pix</td><td ${tdR}>− ${brl(o.pixd)}</td></tr>`:''}<tr><td ${tdL}>Frete</td><td ${tdR}>${o.frete?brl(o.frete):'Grátis'}</td></tr><tr><td ${tdL}><b>Total</b></td><td ${tdR}><b>${brl(o.total)}</b></td></tr></table>`;
+const MAILS={
+ conf:o=>[`Recebemos seu pedido ${o.num}`,`<p>Olá, ${esc(o.cli.nome.split(' ')[0])}! Recebemos seu pedido e ele já está separado no ateliê.</p>${itensTxt(o)}<p>Pagamento: ${o.pay==='pix'?'Pix (aguardando pagamento, válido por 30 minutos)':'cartão final '+o.last4+(o.parc>1?` em ${o.parc}x`:'')}.<br>Entrega: ${esc(o.end)} · ${o.envio.nome}, ${o.envio.prazo}.</p>${o.pay==='pix'?`<p>Código Pix copia e cola: <code style="word-break:break-all">${pixCode(o)}</code></p>`:''}<p>Você pode desistir da compra em até 7 dias após receber o pedido, com reembolso integral.</p>`],
+ pago:o=>[`Pagamento aprovado · pedido ${o.num}`,`<p>O pagamento do pedido ${o.num} foi aprovado. Agora é com a gente: o pacote sai do ateliê em até 1 dia útil.</p><table style="width:100%;border-collapse:collapse;margin:14px 0;background:#fff8ea;border:1px solid #eadfce;border-radius:10px"><tr><td style="padding:12px 14px">Código de rastreio<br><b style="font-size:20px;letter-spacing:1px">${o.rastreio}</b><br><span style="font-size:13px;color:#6d5f52">${esc(o.envio.nome)} · prazo de ${o.envio.prazo}</span></td></tr></table>${btnMail(BASE()+'#rastreio-'+o.num.toLowerCase(),'Acompanhar meu pedido')}<h3 style="font-size:17px;margin:22px 0 6px">Como foi o nosso atendimento até aqui?</h3><p style="margin:0 0 10px">Toque em uma nota de 1 a 5. Leva um segundo e ajuda a gente a melhorar.</p><p style="margin:0">${[1,2,3,4,5].map(n=>`<a href="${BASE()}#avaliar-${o.num.toLowerCase()}-${n}" style="display:inline-block;margin:0 4px 6px 0;padding:8px 12px;border:1px solid #eadfce;border-radius:10px;text-decoration:none;color:#24190f;background:#fff"><span style="color:#ffb703;font-size:18px">★</span> ${n}</a>`).join('')}</p><p style="font-size:13px;color:#6d5f52;margin-top:4px">1 = muito ruim · 5 = excelente</p>`],
+ analise:o=>[`Pedido ${o.num} em análise de segurança`,`<p>Recebemos o pedido ${o.num}. Por segurança, o pagamento passa por uma análise antes de ser aprovado. A resposta chega neste e-mail em até 2 horas. Nada é cobrado se o pedido não for aprovado.</p>`],
+ recusado:o=>[`Pedido ${o.num} não aprovado`,`<p>A análise de segurança não aprovou o pagamento do pedido ${o.num}, e nada foi cobrado. Se quiser, tente de novo com Pix ou com outro cartão.</p>`],
+ enviado:o=>[`Seu pedido ${o.num} saiu para entrega`,`<p>O pedido ${o.num} foi postado. Código de rastreio: <b>${o.rastreio}</b>.</p><p>Prazo estimado: ${o.envio.prazo}.</p>`],
+ entregue:o=>[`Pedido ${o.num} entregue`,`<p>O pedido ${o.num} foi entregue. Se algo não serviu, a troca de tamanho é grátis em até 30 dias. Lembrando: você tem 7 dias a partir de hoje para desistir da compra, com reembolso integral.</p>`],
+ aval:o=>[`Seu pet aprovou? Conte para a gente`,`<p>Faz alguns dias que o pedido ${o.num} chegou. Responda este e-mail com uma nota de 1 a 5 e, se quiser, uma foto do seu pet usando o produto. Leva um minuto e ajuda outros tutores a escolher.</p>`],
+ recompra:o=>[`Já é hora de renovar os brinquedos?`,`<p>Brinquedo novo renova o interesse do pet. Use o cupom <b>VOLTA10</b> para ganhar 10% de desconto na próxima compra.</p><p>A Caixinha Surpresa deste mês já saiu: </p>${btnMail(BASE()+"#p-caixinha-surpresa","Ver a caixinha do mês")}`]
+};
+const gerarRastreio=()=>'BFR-'+String(Math.floor(Math.random()*9e7+1e7));
+function sendMail(o,k){if(k==='pago'){o.pagoEm=o.pagoEm||now();if(!o.rastreio)o.rastreio=gerarRastreio();save()}const[s,b]=MAILS[k](o);mail(o.cli.email,s,k,b,{order:o.num});o.mails=o.mails||{};o.mails[k]=now();save()}
+function avisoLoja(o){if(!CFG.lojaEmail)return;mail(CFG.lojaEmail,`Novo pedido ${o.num} · ${brl(o.total)}`,'loja',`<p>Cliente: ${esc(o.cli.nome)} · ${esc(o.cli.email)} · ${esc(o.cli.tel)}</p>${itensTxt(o)}<p>Pagamento: ${o.pay==='pix'?'Pix (aguardando)':`cartão ${o.bandeira} final ${o.last4}${o.parc>1?` em ${o.parc}x`:''}`} · antifraude: score ${o.af.score}</p><p>Entrega: ${esc(o.end)} · ${o.envio.nome}</p>`,{order:o.num})}
+
+/* ---------- acompanhar pedido ---------- */
+const ETAPAS=[['Pedido recebido','at'],['Pagamento aprovado','pagoEm'],['Em separação no ateliê','pagoEm'],['Enviado','enviadoEm'],['Entregue','entregueEm']];
+function etapaAtual(o){return{aguardando:0,analise:0,recusado:0,pago:2,enviado:3,entregue:4}[o.status]}
+function linhaDoTempo(o){const k=etapaAtual(o);if(o.status==='recusado')return'<div class="alert bad">Pagamento não aprovado. Nada foi cobrado.</div>';
+  return`<ol class="tl">${ETAPAS.map((e,i)=>{const st=i<k||(i===k&&i===4)||(i===k&&i===0&&false)?'done':i===k?'now':'';const t=o[e[1]];return`<li class="${i<=k?'done':''} ${i===k&&i<4?'now':''}"><b>${e[0]}</b>${i<=k&&t?`<small>${fmtD(t)}</small>`:i===k+1?'<small>próxima etapa</small>':''}${i===1&&o.status==='aguardando'?'<small>aguardando o Pix</small>':''}${i===1&&o.status==='analise'?'<small>em análise de segurança</small>':''}</li>`}).join('')}</ol>`}
+V.rastreio=()=>{const q=(V.rq||'').toLowerCase();const o=q?S.orders.find(x=>x.num.toLowerCase()===q||(x.rastreio||'').toLowerCase()===q):null;
+  const lista=S.orders.slice(0,6);
+  const form=`<form id="frast" class="box" style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end"><div style="flex:1;min-width:200px"><label for="rq">Número do pedido ou código de rastreio</label><input id="rq" value="${esc((V.rq||'').toUpperCase())}" placeholder="Ex.: BF10231 ou BFR-12345678"></div><button class="btn" type="submit">Acompanhar</button></form>`;
+  let corpo='';
+  if(q&&!o)corpo=`<div class="alert warn" style="margin-top:14px">Não encontramos esse pedido. Confira o número no e-mail de confirmação. Se você comprou em outro aparelho, abra o link do e-mail no mesmo navegador em que fez a compra.</div>`;
+  if(o){const podeConfirmar=o.status==='pago'||o.status==='enviado';const av=S.avals.find(a=>a.num===o.num);
+    corpo=`<div class="pp" style="margin-top:18px;gap:24px"><div class="box"><h2 style="margin-bottom:4px">Pedido ${o.num}</h2><p class="note">Feito em ${fmtD(o.at)} · ${esc(o.cli.email)}</p>${o.rastreio?`<p style="margin:10px 0">Código de rastreio: <b style="font-size:19px">${o.rastreio}</b></p>`:''}${linhaDoTempo(o)}
+    ${podeConfirmar?`<div style="margin-top:14px"><p>Seu pedido já chegou? Confirme o recebimento para encerrar a entrega.</p><button class="btn mango" data-act="confirmar" data-v="${o.num}">Confirmar que recebi o pedido</button></div>`:''}
+    ${o.status==='entregue'?`<div class="alert ok" style="margin-top:14px"><b>Entregue${o.confirmadoCliente?' e confirmado por você':''}.</b> Você tem 7 dias para desistir da compra e 30 dias para trocar o tamanho.</div>`:''}
+    ${o.status==='entregue'||o.status==='enviado'||o.status==='pago'?`<div style="margin-top:14px"><h3>Avalie o nosso atendimento</h3>${av?`<p>Você deu nota <b>${av.nota}</b>. Obrigado!</p>`:`<div class="opts">${[1,2,3,4,5].map(n=>`<a class="opt" style="text-decoration:none" href="#avaliar-${o.num.toLowerCase()}-${n}">★ ${n}</a>`).join('')}</div><p class="note">1 = muito ruim · 5 = excelente</p>`}</div>`:''}</div>
+    <div class="box"><h3>Itens</h3>${o.itens.map(i=>`<p style="margin:0 0 6px">${i.q}× ${esc(i.nome)} <span class="note">(${esc(i.var)})</span></p>`).join('')}<p style="margin-top:10px"><b>Total: ${brl(o.total)}</b></p><h3 style="margin-top:14px">Entrega</h3><p>${esc(o.end)}<br>${o.envio.nome} · ${o.envio.prazo}</p><a href="#pedido-${o.num.toLowerCase()}">Ver detalhes do pedido</a></div></div>`}
+  return`<section class="band"><div class="wrap">${crumbs([['Início','inicio'],['Meu pedido']])}<h1 style="margin-bottom:14px">Acompanhar pedido</h1>${form}${corpo}${!o&&lista.length?`<h3 style="margin-top:22px">Pedidos feitos neste navegador</h3><div style="display:flex;gap:8px;flex-wrap:wrap">${lista.map(x=>`<a class="chip" style="text-decoration:none" href="#rastreio-${x.num.toLowerCase()}">${x.num} · ${statusTxt(x)}</a>`).join('')}</div>`:''}</div></section>`};
+const statusTxt=o=>({aguardando:'aguardando Pix',analise:'em análise',pago:'pago',enviado:'enviado',entregue:'entregue',recusado:'recusado'})[o.status];
+function registrarAval(num,nota){if(!num||!(nota>=1&&nota<=5))return;num=num.toUpperCase();V.av={num,nota};let a=S.avals.find(x=>x.num===num);if(a){if(a.nota===nota)return;a.nota=nota;a.at=now()}else{a={num,nota,at:now()};S.avals.unshift(a)}save();
+  mail(CFG.lojaEmail,`Avaliação de atendimento: ${'★'.repeat(nota)} (${nota}/5) · pedido ${num}`,'aval-loja',`<p>O cliente do pedido <b>${num}</b> deu nota <b>${nota} de 5</b> para o atendimento.</p>`,{order:num})}
+V.avaliacao=()=>{const a=V.av||{};const o=S.orders.find(x=>x.num===a.num);return`<section class="band"><div class="wrap" style="max-width:720px"><div class="box" style="text-align:center;padding:28px"><div style="font-size:40px;color:#ffb703;letter-spacing:4px">${'★'.repeat(a.nota||0)}<span style="color:var(--line)">${'★'.repeat(5-(a.nota||0))}</span></div><h1 style="margin:10px 0">Obrigado pela avaliação!</h1><p>Você deu nota <b>${a.nota||'-'} de 5</b> para o atendimento do pedido ${esc(a.num||'')}.</p>${a.comentado?'<p class="alert ok">Comentário enviado. Obrigado!</p>':`<form id="fcom" style="text-align:left;margin-top:14px"><label for="com-txt">Quer contar mais? (opcional)</label><textarea id="com-txt" rows="3" placeholder="O que foi bom e o que podemos melhorar?"></textarea><button class="btn" type="submit" style="margin-top:8px">Enviar comentário</button></form>`}<p style="margin-top:16px">${o?`<a href="#rastreio-${o.num.toLowerCase()}">Acompanhar o pedido</a> · `:''}<a href="#loja">Voltar à loja</a></p></div></div></section>`};
+
+/* ---------- antifraude ---------- */
+function antifraude(cli,total,cardRes){let s=5;const why=[];if(total>500){s+=25;why.push('valor acima de R$ 500 (+25)')}if(/@(mailinator|tempmail|10minutemail|guerrillamail)\./i.test(cli.email)){s+=35;why.push('e-mail descartável (+35)')}if(cli.nome.trim().split(/\s+/).length<2){s+=10;why.push('nome incompleto (+10)')}if(S.tries>=2){s+=30;why.push(`${S.tries} tentativas recusadas nesta sessão (+30)`)}if(cardRes==='antifraude'){s+=70;why.push('cartão sinalizado pela rede (+70)')}return{score:Math.min(100,s),why:why.length?why:['nenhum sinal de risco'],dec:s>=60?'analise':'aprovado'}}
+
+/* ---------- pagamento ---------- */
+function criarPedido(pay,extra){const t=totais(pay);const d=S.ck;S.seq++;const num='BF'+S.seq;const o={num,at:now(),cli:{email:d.email,nome:d.nome,tel:d.tel,mkt:!!d.mkt},end:`${d.rua}, ${d.num}${d.comp?' · '+d.comp:''} · ${d.bairro} · ${d.cid}/${d.uf.toUpperCase()} · CEP ${S.ship.cep}`,reg:t.f.reg,envio:{nome:t.f.nome,prazo:t.f.prazo,custo:t.f.custo},itens:t.lines.map(l=>({nome:l.p.nome,var:l.v.nome,sku:l.v.sku,q:l.q,preco:l.v.preco,custo:l.v.custo})),sub:t.sub,cup:t.cup,cupom:S.cupom,pixd:t.pix,frete:t.frete,total:t.total,pay,...extra};
+  for(const l of t.lines)S.stock[l.v.sku]=stockOf(l.v)-l.q;
+  const ab=S.aband.find(a=>a.email===d.email&&(a.status==='aberto'||a.status==='lembrete enviado'));if(ab){ab.status=ab.status==='lembrete enviado'||S.recover===ab.id?'recuperado':'convertido';ab.order=num}
+  S.orders.unshift(o);S.cart=[];S.cupom='';S.recover=null;save();updCount();return o}
+function pagar(){const t=totais(CK.pay);CK.err={};CK.payErr='';
+  CK.ok=$('#ck-ok').checked;if(!CK.ok){CK.err.ok='Marque que você leu as políticas para continuar.';return render()}
+  if(CK.pay==='pix'){const o=criarPedido('pix',{status:'aguardando',af:{score:0,why:['Pix: risco baixo, sem análise'],dec:'aprovado'}});sendMail(o,'conf');avisoLoja(o);CK={step:1,pay:'pix',err:{},parc:1};location.hash='pedido-'+o.num.toLowerCase();return}
+  const num=onlyD($('#cc-num').value),nome=$('#cc-nome').value.trim(),val=$('#cc-val').value.trim(),cvv=onlyD($('#cc-cvv').value),parc=+$('#cc-parc').value;CK.cc=$('#cc-num').value;CK.ccn=nome;CK.ccv=val;CK.parc=parc;
+  if(num.length<13||num.length>19)CK.err.cc='Digite o número do cartão (de 13 a 19 dígitos).';
+  if(nome.split(/\s+/).length<2)CK.err.ccn='Digite o nome como está no cartão.';
+  const m=val.match(/^(\d{2})\/(\d{2})$/);if(!m||+m[1]<1||+m[1]>12||new Date(2000+ +m[2],+m[1],0)<new Date())CK.err.ccv='Validade inválida ou vencida.';
+  if(cvv.length<3)CK.err.cvv='CVV inválido.';
+  if(Object.keys(CK.err).length)return render();
+  const[bandeira,res]=TEST_CARDS[num]||[bandeiraDe(num),'ok'];
+  if(res==='recusado'){S.tries++;save();CK.payErr='Pagamento recusado pelo emissor do cartão (saldo insuficiente). Tente outro cartão ou pague com Pix.';return render()}
+  const af=antifraude(S.ck,t.total,res);const p=parcelas(t.total).find(x=>x.n===parc)||{n:1,pm:t.total};
+  const o=criarPedido('cartao',{status:af.dec==='aprovado'?'pago':'analise',af,bandeira,last4:num.slice(-4),parc:p.n,pm:p.pm});
+  sendMail(o,'conf');sendMail(o,af.dec==='aprovado'?'pago':'analise');avisoLoja(o);S.tries=0;save();CK={step:1,pay:'pix',err:{},parc:1};location.hash='pedido-'+o.num.toLowerCase()}
+
+/* ---------- painel ---------- */
+function margem(o){const liq=o.sub-o.cup-o.pixd;const cmv=o.itens.reduce((a,i)=>a+i.custo*i.q,0);const imp=liq*RULES.imposto;const taxa=(liq+o.frete)*(o.pay==='pix'?RULES.taxaPix:RULES.taxaCartao);const frete=o.envio.custo;const dev=liq*RULES.devol;const mc=liq+o.frete-cmv-RULES.embalagem-imp-taxa-frete-dev;return{liq,cmv,imp,taxa,frete,dev,mc,pct:mc/(liq+o.frete)}}
+V.painel=()=>{const os=S.orders;const pagos=os.filter(o=>['pago','enviado','entregue'].includes(o.status));const rec=pagos.reduce((a,o)=>a+o.total,0);const tm=pagos.length?rec/pagos.length:0;const conv=S.visits?pagos.length/S.visits:0;const mcs=pagos.map(margem);const mcm=mcs.length?mcs.reduce((a,m)=>a+m.mc,0)/mcs.length:0;
+  return`<section class="band"><div class="wrap">${crumbs([['Início','inicio'],['Painel do lojista']])}<h1 style="margin-bottom:6px">Painel do lojista</h1><p class="note" style="margin-bottom:18px">Os pedidos, carrinhos e e-mails ficam salvos neste navegador. Use os botões para avançar cada pedido: cada etapa envia um e-mail ao cliente.</p>
+  <div class="kpis"><div><small>Pedidos pagos</small><b>${pagos.length}</b></div><div><small>Receita</small><b>${brl(rec)}</b></div><div><small>Ticket médio</small><b>${brl(tm)}</b></div><div><small>Conversão (pedidos ÷ visitas)</small><b>${S.visits?(conv*100).toFixed(1).replace('.',',')+'%':'—'}</b><small>${S.visits} visita${S.visits!==1?'s':''} com cookies de medição; cada vez que a página é aberta ou recarregada conta como uma visita</small></div><div><small>Margem de contribuição média</small><b>${brl(mcm)}</b></div></div>
+  <h2>Pedidos</h2>${os.length?`<div class="scroll"><table class="stack"><thead><tr><th>Pedido</th><th>Cliente</th><th class="n">Total</th><th>Pagamento</th><th>Antifraude</th><th>Status</th><th class="n">Margem</th><th>Ações</th></tr></thead><tbody>${os.map(o=>{const m=margem(o);return`<tr><td><a href="#pedido-${o.num.toLowerCase()}">${o.num}</a><br><small class="note">${fmtD(o.at)}</small></td><td>${esc(o.cli.nome)}<br><small class="note">${esc(o.cli.email)}</small></td><td class="n">${brl(o.total)}</td><td>${o.pay==='pix'?'Pix':`${o.bandeira} ${o.last4}${o.parc>1?' · '+o.parc+'x':''}`}</td><td><span class="pill ${o.af.dec==='aprovado'&&o.status!=='recusado'?'ok':o.status==='recusado'?'bad':'warn'}">score ${o.af.score}</span><br><small class="note">${o.af.why.join('; ')}</small></td><td>${statusPill(o)}</td><td class="n">${brl(m.mc)}<br><small class="note">${(m.pct*100).toFixed(0)}%</small></td><td>${acoes(o)}</td></tr>`}).join('')}</tbody></table></div>
+  <details style="margin-top:10px"><summary>Como a margem de cada pedido é calculada</summary><p class="note">Receita dos produtos (já com descontos) + frete cobrado − custo dos produtos − embalagem (${brl(RULES.embalagem)}) − imposto (6% sobre os produtos) − taxa de pagamento (cartão 4,5%, Pix 1%) − custo real do frete − devoluções estimadas (2%).</p></details>`:'<p>Nenhum pedido ainda. <a href="#loja">Faça um pedido de teste</a>.</p>'}
+  <h2 style="margin-top:28px">Carrinhos abandonados</h2><p class="note">Quando o cliente informa o e-mail no checkout e sai sem pagar, a loja envia um lembrete. O lembrete sai ${RULES.abandonoSeg} segundos depois, com a loja ainda aberta no navegador do cliente. O e-mail traz um botão que recupera o carrinho.</p>${S.aband.length?`<div class="scroll"><table class="stack"><thead><tr><th>E-mail</th><th>Itens</th><th class="n">Valor</th><th>Início</th><th>Situação</th></tr></thead><tbody>${S.aband.map(a=>`<tr><td>${esc(a.email)}</td><td>${a.items.map(i=>i.q+'× '+esc(i.nome)).join(', ')}</td><td class="n">${brl(a.valor)}</td><td>${fmtD(a.at)}</td><td><span class="pill ${a.status==='recuperado'?'ok':a.status==='convertido'?'info':'warn'}">${a.status}</span>${a.order?' · '+a.order:''}</td></tr>`).join('')}</tbody></table></div>`:'<p class="note">Nenhum carrinho abandonado.</p>'}
+  <h2 style="margin-top:28px">Avaliações do atendimento</h2>${S.avals.length?`<p>Média: <b>${(S.avals.reduce((a,x)=>a+x.nota,0)/S.avals.length).toFixed(1).replace('.',',')} de 5</b> em ${S.avals.length} avaliaç${S.avals.length>1?'ões':'ão'}</p><div class="scroll"><table class="stack"><thead><tr><th>Pedido</th><th>Nota</th><th>Comentário</th><th>Data</th></tr></thead><tbody>${S.avals.map(a=>`<tr><td>${a.num}</td><td>${'★'.repeat(a.nota)} ${a.nota}/5</td><td>${esc(a.comentario||'')}</td><td>${fmtD(a.at)}</td></tr>`).join('')}</tbody></table></div>`:'<p class="note">Nenhuma avaliação ainda. O link de avaliação vai no e-mail de pagamento aprovado e na página Meu pedido.</p>'}
+  <h2 style="margin-top:28px">E-mails enviados</h2><p class="note">${emailPronto()?'Envio real ativado pelo EmailJS.':'<b>EmailJS ainda não configurado:</b> preencha as chaves no início do arquivo index.html.'} Registro dos últimos envios feitos a partir deste navegador.</p>${S.emails.length?`<div class="scroll"><table class="stack"><thead><tr><th>Data</th><th>Para</th><th>Assunto</th><th>Situação</th></tr></thead><tbody>${S.emails.map(m=>`<tr><td>${fmtD(m.at)}</td><td>${esc(m.to)}</td><td>${esc(m.subject)}</td><td><span class="pill ${m.st==='enviado'?'ok':m.st==='na fila'?'info':'bad'}">${esc(m.st||'')}</span></td></tr>`).join('')}</tbody></table></div>`:'<p class="note">Nenhum e-mail enviado ainda.</p>'}
+  <h2 style="margin-top:28px">Regras configuradas</h2><div class="scroll"><table class="stack"><thead><tr><th>Regra</th><th>Configuração</th><th>Por quê</th></tr></thead><tbody>
+  <tr><td>Frete por CEP</td><td>O CEP identifica cidade e estado. Preço e prazo por estado, saindo de Juiz de Fora; interior paga ${brl(INTERIOR.valor)} a mais e leva ${INTERIOR.dias} dia a mais que a capital; Juiz de Fora tem tabela própria e retirada no ateliê</td><td>Reflete a distância e o custo real da transportadora</td></tr><tr><td>Frete grátis</td><td>Acima de ${brl(RULES.freteGratis)} no envio econômico, para Sudeste e Sul</td><td>Nessas regiões o frete custa até cerca de R$ 35, que cabe na margem de um pedido desse valor</td></tr>
+  <tr><td>Desconto no Pix</td><td>5% sobre os produtos</td><td>A taxa do Pix (1%) é menor que a do cartão (4,5%) e o dinheiro entra na hora</td></tr>
+  <tr><td>Parcelamento</td><td>Até 3x sem juros (parcela mínima R$ 30); 4x a 6x com juros de 2,49% a.m.</td><td>Até 3x a loja absorve a taxa sem perder a margem</td></tr>
+  <tr><td>Antifraude</td><td>Score de 0 a 100 em todo pedido de cartão; a partir de 60 vai para análise manual</td><td>Sinais: valor alto, e-mail descartável, nome incompleto, tentativas recusadas, alerta da rede</td></tr>
+  <tr><td>Carrinho abandonado</td><td>1 lembrete por e-mail, 1 hora depois</td><td>Recupera vendas sem incomodar; o cliente pode se descadastrar</td></tr>
+  <tr><td>Pós-venda</td><td>Confirmação → pagamento → envio com rastreio → entrega → avaliação (5 dias depois) → recompra com cupom VOLTA10 (30 dias depois)</td><td>Gera avaliações e aumenta a recompra, o que sobe o LTV</td></tr></tbody></table></div>
+  <h2 style="margin-top:28px">Estoque</h2><div class="scroll"><table class="stack"><thead><tr><th>SKU</th><th>Produto</th><th>Variação</th><th class="n">Preço</th><th class="n">Custo</th><th class="n">Estoque</th></tr></thead><tbody>${P.flatMap(p=>p.vars.map(v=>`<tr><td>${v.sku}</td><td>${esc(p.nome)}</td><td>${esc(v.nome)}</td><td class="n">${brl(v.preco)}</td><td class="n">${brl(v.custo)}</td><td class="n">${stockOf(v)}</td></tr>`)).join('')}</tbody></table></div>
+  <p style="margin-top:24px"><button class="btn alt" data-act="reset">Apagar todos os pedidos salvos</button></p>${V.confirmReset?`<div class="alert bad">Isso apaga pedidos, e-mails, carrinho, estoque e a escolha de cookies deste navegador. O aviso de cookies volta a aparecer. <button class="btn sm" data-act="reset2">Sim, apagar</button> <button class="btn sm alt" data-act="reset0">Cancelar</button></div>`:''}</div></section>`};
+function acoes(o){const b=(a,t)=>`<button class="btn sm alt" style="margin:2px" data-act="${a}" data-v="${o.num}">${t}</button>`;if(o.status==='aguardando')return b('pixpay','Confirmar Pix');if(o.status==='analise')return b('afok','Aprovar')+b('afno','Recusar');if(o.status==='pago')return b('postar','Marcar enviado');if(o.status==='enviado')return b('deliv','Marcar entregue');if(o.status==='entregue'){let s='';if(!o.mails.aval)s+=b('aval','Enviar pedido de avaliação');if(!o.mails.recompra)s+=b('recomp','Enviar e-mail de recompra');return s||'<small class="note">Sequência completa</small>'}return''}
+
+/* ---------- institucionais ---------- */
+V.sobre=()=>`<section class="band"><div class="wrap prose">${crumbs([['Início','inicio'],['Sobre']])}<h1>Sobre o ateliê</h1><p style="margin-top:12px">A Bigode & Focinho nasceu em Juiz de Fora, de duas tutoras cansadas de comprar brinquedos que duravam uma semana e coleiras que machucavam. Hoje produzimos em pequenos lotes, com algodão, couro, corda natural e sisal, e escolhemos a dedo cada brinquedo que vendemos.</p><h2>O que nos guia</h2><ul><li><b>Seguro para morder e arranhar:</b> nada de tinta tóxica, peças pequenas soltas ou plástico frágil.</li><li><b>Tamanho certo:</b> cada produto tem guia de medidas e a primeira troca de tamanho é grátis.</li><li><b>Envio rápido:</b> o pedido sai do ateliê em até 1 dia útil depois da aprovação do pagamento.</li></ul><p class="note">História, empresa e endereço fictícios, criados para um trabalho acadêmico de comércio eletrônico.</p></div></section>`;
+V.contato=()=>`<section class="band"><div class="wrap prose">${crumbs([['Início','inicio'],['Fale conosco']])}<h1>Fale conosco</h1><p style="margin-top:12px">E-mail: bigodeefocinhopets@gmail.com · Telefone e WhatsApp: (32) 0000-0000 · Seg. a sex., 9h às 18h. Respondemos em até 1 dia útil.</p><p>Endereço: Rua Fictícia, 100, Centro, Juiz de Fora/MG, CEP 36000-000.</p><form id="fcont" class="box" novalidate><div class="row2"><div class="fld"><label for="ct-nome">Nome</label><input id="ct-nome"></div><div class="fld"><label for="ct-email">E-mail</label><input id="ct-email" type="email"></div></div><div class="fld"><label for="ct-msg">Mensagem</label><textarea id="ct-msg" rows="4"></textarea></div><div id="ct-err"></div><button class="btn" type="submit">Enviar mensagem</button></form></div></section>`;
+V.trocas=()=>`<section class="band"><div class="wrap prose">${crumbs([['Início','inicio'],['Trocas e devoluções']])}<h1>Trocas e devoluções</h1>
+<h2>Direito de arrependimento: 7 dias</h2><p>Em compras pela internet, você pode desistir em até 7 dias corridos a partir do recebimento, sem precisar justificar (art. 49 do Código de Defesa do Consumidor). Devolvemos o valor total pago, incluindo o frete, pelo mesmo meio de pagamento: estorno no cartão ou Pix em até 5 dias úteis depois que o produto chegar ao ateliê. O frete de devolução é por nossa conta.</p>
+<h2>Troca de tamanho: 30 dias</h2><p>Se o tamanho não serviu, trocamos em até 30 dias após o recebimento, desde que o produto não tenha sido usado e esteja com a etiqueta. A primeira troca tem frete grátis nos dois sentidos.</p>
+<h2>Produto com defeito: 90 dias</h2><p>Para defeitos aparentes, o prazo é de 90 dias após o recebimento (art. 26 do CDC). Consertamos, trocamos por um novo ou devolvemos o dinheiro, à sua escolha, se o problema não for resolvido em 30 dias.</p>
+<h2>Como pedir</h2><ol><li>Escreva para bigodeefocinhopets@gmail.com com o número do pedido.</li><li>Enviamos um código de postagem sem custo.</li><li>Quando o pacote chega, avisamos e fazemos a troca ou o reembolso.</li></ol>
+<p class="note">Brinquedos com sinais de mordida ou arranhão só são trocados em caso de defeito de fabricação.</p></div></section>`;
+V.privacidade=()=>`<section class="band"><div class="wrap prose" style="max-width:980px">${crumbs([['Início','inicio'],['Privacidade']])}<h1>Política de privacidade</h1><p style="margin-top:12px">Esta política explica quais dados pessoais a Bigode & Focinho coleta, para quê, com que base na Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018) e como você exerce seus direitos. Controladora: Bigode & Focinho Acessórios Pet Ltda. Encarregado de dados: bigodeefocinhopets@gmail.com.</p>
+<h2>Dados que coletamos</h2><div class="scroll"><table class="stack"><thead><tr><th>Dado</th><th>Para quê</th><th>Base legal (LGPD, art. 7º)</th><th>Por quanto tempo</th></tr></thead><tbody>
+<tr><td>Nome, endereço e celular</td><td>Emitir nota fiscal e entregar o pedido</td><td>Execução de contrato (V) e obrigação legal fiscal (II)</td><td>5 anos (prazo fiscal)</td></tr>
+<tr><td>E-mail</td><td>Confirmação, rastreio e avisos do pedido</td><td>Execução de contrato (V)</td><td>Enquanto houver pedido em aberto + 6 meses</td></tr>
+<tr><td>E-mail para novidades</td><td>Ofertas e lançamentos</td><td>Consentimento (I), só se você marcar a opção</td><td>Até você cancelar</td></tr>
+<tr><td>E-mail e itens do carrinho não finalizado</td><td>Um lembrete de carrinho abandonado</td><td>Legítimo interesse (IX), com opção de descadastro</td><td>30 dias</td></tr>
+<tr><td>Dados do cartão</td><td>Processar o pagamento</td><td>Execução de contrato (V)</td><td>A loja não guarda o número; só os 4 últimos dígitos</td></tr>
+<tr><td>Sinais do pedido (valor, e-mail, tentativas)</td><td>Antifraude</td><td>Proteção do crédito (X) e legítimo interesse (IX)</td><td>Enquanto durar o pedido + 6 meses</td></tr>
+<tr><td>Produtos vistos nesta visita</td><td>Recomendações personalizadas</td><td>Consentimento (I), via cookies de personalização</td><td>Até você retirar o consentimento</td></tr>
+<tr><td>Contagem de visitas</td><td>Medir a conversão da loja</td><td>Consentimento (I), via cookies de medição</td><td>12 meses</td></tr></tbody></table></div>
+<h2>Com quem compartilhamos</h2><p>Gateway de pagamento (para cobrar), transportadora (para entregar), emissor de nota fiscal e o serviço que envia nossos e-mails (EmailJS), que recebe só o seu e-mail e o conteúdo da mensagem. Não vendemos dados pessoais.</p>
+<h2>Uso de inteligência artificial</h2><p>As sugestões “Escolhidos para você” e “Combina com este produto” usam um sistema de recomendação que cruza os produtos vistos e os itens do carrinho com a espécie do pet e com produtos que costumam ser comprados juntos. Ele só usa o histórico de navegação se você ativar os cookies de personalização. Sem isso, mostra os mais vendidos. Nenhuma decisão de preço ou crédito é tomada por esse sistema.</p>
+<h2>Seus direitos</h2><p>Você pode pedir: confirmação e acesso aos dados, correção, anonimização ou exclusão, portabilidade, informação sobre compartilhamento e revogação do consentimento (art. 18 da LGPD). Respondemos em até 15 dias.</p>
+<form id="fdir" class="box" novalidate><h3>Exercer meus direitos</h3><div class="row2"><div class="fld"><label for="dr-email">E-mail usado nas compras</label><input id="dr-email" type="email"></div><div class="fld"><label for="dr-tipo">Pedido</label><select id="dr-tipo"><option>Acesso aos meus dados</option><option>Correção de dados</option><option>Exclusão dos meus dados</option><option>Revogar consentimento de e-mails</option><option>Portabilidade</option></select></div></div><div id="dr-err"></div><button class="btn" type="submit">Enviar solicitação</button></form>
+${S.reqs.length?`<p class="note" style="margin-top:8px">Solicitações registradas neste navegador: ${S.reqs.map(r=>r.prot+' ('+esc(r.tipo)+')').join(', ')}</p>`:''}</div></section>`;
+V.cookies=()=>`<section class="band"><div class="wrap prose">${crumbs([['Início','inicio'],['Cookies']])}<h1>Política de cookies</h1><p style="margin-top:12px">Cookies e armazenamento local guardam pequenas informações no seu navegador. Usamos três tipos:</p><div class="scroll"><table class="stack"><thead><tr><th>Tipo</th><th>Para quê</th><th>Pode desligar?</th></tr></thead><tbody><tr><td>Necessários</td><td>Carrinho, CEP do frete, etapa do checkout e suas escolhas de cookies</td><td>Não: a loja não funciona sem eles</td></tr><tr><td>Medição</td><td>Contar visitas para calcular a taxa de conversão</td><td>Sim</td></tr><tr><td>Personalização</td><td>Lembrar os produtos vistos para recomendar itens</td><td>Sim</td></tr></tbody></table></div><p>Não usamos cookies de publicidade de terceiros.</p><p>Sua escolha atual: ${S.consent?`medição ${S.consent.med?'ativada':'desativada'}, personalização ${S.consent.pers?'ativada':'desativada'}`:'ainda não escolhida'}. <button class="btn sm alt" data-act="cookieprefs">Mudar preferências</button></p></div></section>`;
+/* ---------- cookies ---------- */
+function cookieBox(full){const b=$('#cookieBox');const c=S.consent||{med:false,pers:false};b.hidden=false;b.innerHTML=`<h3>Cookies e privacidade</h3><p style="font-size:15px">Usamos cookies necessários para o carrinho funcionar. Com sua permissão, também usamos cookies de medição (contar visitas) e de personalização (recomendar produtos). <a href="#cookies">Saiba mais</a></p>${full?`<label class="ck" style="font-weight:400"><input type="checkbox" checked disabled><span><b>Necessários</b> · sempre ativos</span></label><label class="ck" style="font-weight:400"><input type="checkbox" id="ck-med" ${c.med?'checked':''}><span><b>Medição</b> · contagem de visitas</span></label><label class="ck" style="font-weight:400"><input type="checkbox" id="ck-pers" ${c.pers?'checked':''}><span><b>Personalização</b> · recomendações a partir dos produtos vistos</span></label><div class="acts"><button class="btn sm" data-act="cksave">Salvar escolhas</button></div>`:`<div class="acts"><button class="btn sm" data-act="ckall">Aceitar todos</button><button class="btn sm alt" data-act="cknone">Só os necessários</button><button class="btn sm alt" data-act="ckcustom">Personalizar</button></div>`}`}
+function setConsent(med,pers){const first=!S.consent;S.consent={med,pers,at:now()};if(!pers)S.viewed=[];if(first&&med)S.visits++;save();$('#cookieBox').hidden=true;render()}
+
+/* ---------- carrinho abandonado ---------- */
+function marcarAbandono(){const lines=cartLines();if(!lines.length||!S.ck.email)return;let a=S.aband.find(x=>x.email===S.ck.email&&x.status==='aberto');if(!a){a={id:'a'+now(),email:S.ck.email,nome:S.ck.nome,at:now(),status:'aberto'};S.aband.unshift(a)}a.items=lines.map(l=>({sku:l.sku,q:l.q,nome:l.p.nome}));a.valor=subtotal();a.at=now();save()}
+setInterval(()=>{let ch=false;for(const a of S.aband){if(a.status==='aberto'&&now()-a.at>RULES.abandonoSeg*1000&&route()!=='checkout'){a.status='lembrete enviado';mail(a.email,'Você esqueceu algo no carrinho',"aband",`<p>Olá${a.nome?', '+esc(a.nome.split(' ')[0]):''}! Seus itens ainda estão separados:</p><ul>${a.items.map(i=>`<li>${i.q}× ${esc(i.nome)}</li>`).join('')}</ul><p>Valor: <b>${brl(a.valor)}</b>. O estoque é pequeno, então guardamos por 48 horas.</p>${btnMail(BASE()+'#recuperar-'+a.id+'-'+a.items.map(i=>SKUS.indexOf(i.sku)+'x'+i.q).join('-'),'Voltar ao meu carrinho')}`);ch=true}}if(ch){if(route()==='painel')render()}},3000);
+
+/* ---------- roteador ---------- */
+const route=()=>(location.hash||'#inicio').slice(1)||'inicio';
+let lastRoute='';
+function render(){const r=route();let html;
+  if(r.startsWith('recuperar-')){const pt=r.split('-');const its=pt.slice(2).map(x=>x.split('x')).map(([i,q])=>({sku:SKUS[+i],q:+q})).filter(x=>x.sku&&x.q>0);if(its.length){S.cart=its;S.recover=pt[1];save();toast('Seu carrinho foi recuperado')}location.hash='carrinho';return}
+  if(r.startsWith('avaliar-')){const pt=r.split('-');registrarAval(pt[1],+pt[2]);html=V.avaliacao()}else if(r.startsWith('rastreio-')){V.rq=r.slice(9);html=V.rastreio()}else if(r.startsWith('p-'))html=produto(r.slice(2));else if(r.startsWith('pedido-'))html=pedido(r.slice(7));else html=(V[r]||V.inicio)();
+  if(html==='')return;$('#app').innerHTML=html;
+  document.querySelectorAll('nav.main a').forEach(a=>a.classList.toggle('on',a.dataset.nav===r||(a.dataset.nav==='rastreio'&&r.startsWith('rastreio'))));
+  if(r!==lastRoute){if(lastRoute==='checkout'&&r!=='checkout')marcarAbandono();window.scrollTo(0,0);lastRoute=r}
+  if(S.ship.cep)buscarCep(S.ship.cep);
+  const pr=$('#pcepr');if(pr&&S.ship.cep)pr.innerHTML=prodShip(r.slice(2));
+  updCount()}
+function prodShip(id){const p=byId(id);if(!p||!V.ps)return'';const v=p.vars[V.ps.vi];const lines=[{p,v,q:V.ps.q,tot:v.preco*V.ps.q}];const ops=opcoesFrete(S.ship.cep,lines,v.preco*V.ps.q);const d=destino(S.ship.cep);if(!d)return'<p class="err">CEP inválido. Use os 8 números do CEP.</p>';if(d.naoExiste)return'<p class="err">CEP não encontrado. Confira os números.</p>';if(!ops.length)return'';return cepInfo(d)+ops.map(o=>`<div style="display:flex;justify-content:space-between;gap:10px;padding:3px 0"><span>${o.nome} · ${o.prazo}</span><b style="white-space:nowrap">${o.preco===0?'Grátis':brl(o.preco)}</b></div>`).join('')+(ops[0].gratis?'':`<p class="note">Frete grátis no econômico acima de ${brl(RULES.freteGratis)} para Sudeste e Sul.</p>`)}
+window.addEventListener('hashchange',render);
+const fmtCep=v=>{const d=onlyD(v).slice(0,8);return d.length>5?d.slice(0,5)+'-'+d.slice(5):d};
+function setCep(v,mudou){S.ship.cep=fmtCep(v);buscarCep(S.ship.cep,mudou,true);const ops=opcoesFrete(S.ship.cep,cartLines(),subtotal());if(!ops.find(o=>o.id===S.ship.opt))S.ship.opt=ops.length?'eco':'';save()}
+
+/* ---------- eventos ---------- */
+document.addEventListener('click',e=>{const el=e.target.closest('[data-act]');if(!el)return;const a=el.dataset.act,v=el.dataset.v;
+  const o=v&&S.orders.find(x=>x.num===v);
+  switch(a){
+  case'fcat':V.f={...(V.f||{ord:'rel'}),cat:v};render();break;
+  case'img':V.ps.img=+v;render();break;
+  case'var':V.ps.vi=+v;V.ps.img=0;V.ps.q=1;render();break;
+  case'pq':V.ps.q=Math.max(1,V.ps.q+ +v);render();break;
+  case'add':{const p=byId(V.ps.id);const vv=p.vars[V.ps.vi];if(addCart(vv.sku,V.ps.q)){toast(`${p.nome} (${vv.nome}) no carrinho`);render()}break}
+  case'cq':{const l=S.cart.find(x=>x.sku===el.dataset.sku);const[,vv]=varBySku(l.sku);const nq=l.q+ +v;if(nq>stockOf(vv)){toast('Estoque insuficiente');break}l.q=nq;if(l.q<=0)S.cart=S.cart.filter(x=>x!==l);setCep(S.ship.cep);save();render();break}
+  case'rm':S.cart=S.cart.filter(x=>x.sku!==el.dataset.sku);setCep(S.ship.cep);save();render();break;
+  case'nocup':e.preventDefault();S.cupom='';save();render();break;
+  case'gocheck':CK.step=S.ck.email&&S.ck.nome?2:1;CK.err={};location.hash='checkout';break;
+  case'ckstep':CK.step=+v;render();break;
+  case'fill':{const f=(id,x)=>{const i=$(id);if(i)i.value=x};f('#ck-tel','(32) 99999-0000');S.ck.num=S.ck.num||'123';if(!S.ship.cep)setCep('36010-000');save();break}
+  case'pay':CK.pay=v;CK.payErr='';render();break;
+  case'pagar':pagar();break;
+  case'copy':try{navigator.clipboard.writeText(v).then(()=>toast('Código copiado'),()=>toast('Selecione o código e copie'))}catch(err){toast('Selecione o código e copie')}break;
+  case'pixpay':if(o&&o.status==='aguardando'){o.status='pago';sendMail(o,'pago');save();toast('Pagamento confirmado');render()}break;
+  case'afok':if(o){o.status='pago';o.af.why.push('aprovado na análise manual');sendMail(o,'pago');save();render()}break;
+  case'afno':if(o){o.status='recusado';for(const i of o.itens){S.stock[i.sku]=(S.stock[i.sku]??varBySku(i.sku)[1].est0)+i.q}sendMail(o,'recusado');save();render()}break;
+  case'postar':if(o&&o.status==='pago'){o.status='enviado';o.enviadoEm=now();o.rastreio=o.rastreio||gerarRastreio();sendMail(o,'enviado');save();render()}break;
+  case'confirmar':if(o&&(o.status==='pago'||o.status==='enviado')){if(!o.enviadoEm)o.enviadoEm=now();o.status='entregue';o.entregueEm=now();o.confirmadoCliente=true;sendMail(o,'entregue');mail(CFG.lojaEmail,`Cliente confirmou a entrega · ${o.num}`,'entrega-loja',`<p>O cliente ${esc(o.cli.nome)} confirmou que recebeu o pedido ${o.num}.</p>`,{order:o.num});save();toast('Entrega confirmada. Obrigado!');render()}break;
+  case'deliv':if(o){if(!o.enviadoEm)o.enviadoEm=now();o.status='entregue';o.entregueEm=now();sendMail(o,'entregue');save();render()}break;
+  case'aval':if(o){sendMail(o,'aval');render()}break;
+  case'recomp':if(o){sendMail(o,'recompra');render()}break;
+    case'cookieprefs':e.preventDefault();cookieBox(true);break;
+  case'ckall':setConsent(true,true);break;
+  case'cknone':setConsent(false,false);break;
+  case'ckcustom':cookieBox(true);break;
+  case'cksave':setConsent($('#ck-med').checked,$('#ck-pers').checked);break;
+  case'reset':V.confirmReset=true;render();break;
+  case'reset0':V.confirmReset=false;render();break;
+  case'reset2':{S=fresh();V.confirmReset=false;CK={step:1,pay:'pix',err:{},parc:1};save();toast('Dados apagados');render();cookieBox(false);break}
+  }
+});
+document.addEventListener('change',e=>{if(e.target.id==='ord'){V.f={...(V.f||{cat:'Todos'}),ord:e.target.value};render()}if(e.target.name==='ship'){S.ship.opt=e.target.value;save();if(route()==='checkout'){const d=collect2();Object.assign(S.ck,d);save()}render()}});
+document.addEventListener('input',e=>{const t=e.target;if(['ck-cep','ccepi','pcepi'].includes(t.id))t.value=fmtCep(t.value);if(t.id==='cc-num')t.value=onlyD(t.value).slice(0,19).replace(/(\d{4})(?=\d)/g,'$1 ');if(t.id==='cc-val'){const d=onlyD(t.value).slice(0,4);t.value=d.length>2?d.slice(0,2)+'/'+d.slice(2):d}if(t.id==='ck-cep'&&onlyD(t.value).length===8){setCep(t.value,true);const box=$('#ckship');if(box)box.innerHTML=shipBox(subtotal())}});
+const collect2=()=>({uf:($('#ck-uf')||{}).value||S.ck.uf,rua:($('#ck-rua')||{}).value||S.ck.rua,num:($('#ck-num')||{}).value||S.ck.num,comp:($('#ck-comp')||{}).value??S.ck.comp,bairro:($('#ck-bairro')||{}).value||S.ck.bairro,cid:($('#ck-cid')||{}).value||S.ck.cid});
+document.addEventListener('submit',e=>{e.preventDefault();const id=e.target.id;
+  if(id==='searchForm'){V.q=$('#q').value.trim();if(!V.q)return;if(route()==='busca')render();else location.hash='busca';return}
+  if(id==='pcep'||id==='ccep'){setCep($(id==='pcep'?'#pcepi':'#ccepi').value);render();return}
+  if(id==='cupf'){const c=$('#cupi').value.trim().toUpperCase();if(CUPONS[c]){S.cupom=c;save();toast('Cupom aplicado');render()}else toast('Cupom inválido');return}
+  if(id==='f1'){const d={email:$('#ck-email').value.trim(),nome:$('#ck-nome').value.trim(),tel:$('#ck-tel').value.trim(),mkt:$('#ck-mkt').checked};CK.err={};if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email))CK.err.email='Informe um e-mail válido.';if(d.nome.split(/\s+/).length<2)CK.err.nome='Informe nome e sobrenome.';if(onlyD(d.tel).length<10)CK.err.tel='Informe o celular com DDD.';Object.assign(S.ck,d);save();if(Object.keys(CK.err).length)return render();marcarAbandono();CK.step=2;render();return}
+  if(id==='f2'){const d=collect2();Object.assign(S.ck,d);setCep($('#ck-cep').value);CK.err={};{const dz=destino(S.ship.cep);if(!dz)CK.err.cep='CEP inválido.';else if(dz.naoExiste)CK.err.cep='CEP não encontrado.';else if(d.uf&&d.uf.toUpperCase()!==dz.uf)CK.err.uf='Esse CEP é de '+dz.uf+'.'}if(!/^[A-Za-z]{2}$/.test(d.uf||''))CK.err.uf='UF com 2 letras.';for(const k of['rua','num','bairro','cid'])if(!(d[k]||'').trim())CK.err[k]='Campo obrigatório.';save();if(Object.keys(CK.err).length)return render();CK.step=3;render();return}
+  if(id==='frast'){const v=$('#rq').value.trim();if(v)location.hash='rastreio-'+v.toLowerCase();return}
+  if(id==='fcom'){const t=$('#com-txt').value.trim();const a=V.av||{};if(!t)return;mail(CFG.lojaEmail,`Comentário sobre o atendimento · pedido ${a.num}`,'com-loja',`<p>Nota: <b>${a.nota}/5</b> · pedido ${esc(a.num||'')}</p><blockquote style="border-left:3px solid #ffb703;margin:10px 0;padding-left:10px">${esc(t)}</blockquote>`,{order:a.num});const r=S.avals.find(x=>x.num===a.num);if(r){r.comentario=t;save()}a.comentado=true;render();return}
+  if(id==='fcont'){const n=$('#ct-nome').value.trim(),m=$('#ct-email').value.trim(),t=$('#ct-msg').value.trim();if(!n||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)||!t){$('#ct-err').innerHTML='<p class="err">Preencha nome, e-mail válido e mensagem.</p>';return}mail(m,'Recebemos sua mensagem','contato',`<p>Olá, ${esc(n.split(' ')[0])}! Recebemos sua mensagem e respondemos em até 1 dia útil.</p><blockquote style="border-left:3px solid #ffb703;margin:10px 0;padding-left:10px">${esc(t)}</blockquote>`);mail(CFG.lojaEmail,'Nova mensagem de '+n,'contato-loja',`<p>De: ${esc(n)} · ${esc(m)}</p><blockquote style="border-left:3px solid #ffb703;margin:10px 0;padding-left:10px">${esc(t)}</blockquote>`);toast('Mensagem enviada. Você vai receber uma confirmação por e-mail.');e.target.reset();return}
+  if(id==='fdir'){const m=$('#dr-email').value.trim(),t=$('#dr-tipo').value;if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(m)){$('#dr-err').innerHTML='<p class="err">Informe um e-mail válido.</p>';return}const prot='LGPD-'+String(now()).slice(-6);S.reqs.push({prot,tipo:t,email:m,at:now()});save();mail(m,'Solicitação LGPD recebida · '+prot,'lgpd',`<p>Recebemos sua solicitação “${esc(t)}”, protocolo <b>${prot}</b>. Respondemos em até 15 dias, como prevê a LGPD. Podemos pedir uma confirmação de identidade antes de atender.</p>`);mail(CFG.lojaEmail,'Solicitação LGPD '+prot,'lgpd-loja',`<p>Titular: ${esc(m)}</p><p>Pedido: ${esc(t)} · prazo de resposta: 15 dias.</p>`);toast('Solicitação registrada · '+prot);render();return}
+});
+
+render();
+if(!S.consent)cookieBox(false);
+}
+</script>
+</body>
+</html>
